@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
 
-		<form action="<?php print base_url()."encuestas/crear/" ?>" method="post">
+		<form action="<?php print base_url()."encuestas/crear/" ?>" method="post" onsubmit="return validar_crear_encuesta();">
 		
 			<h1 class="text-center page-header">Crear encuesta</h1>
 

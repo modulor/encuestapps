@@ -17,6 +17,9 @@
     <!-- font awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
+    <!-- sweet alert -->
+    <link rel="stylesheet" href="<?php print base_url()."assets/css/sweetalert.css" ?>">
+
     <!--<link rel="shortcut icon" href="img/favicon.ico">-->
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
@@ -48,12 +51,10 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mi cuenta <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
-                                <!--
                                 <li class="dropdown-header">Configuraci&oacute;n</li>
-                                <li><a href="#">Perfil</a></li>
-                                <li><a href="#">Cambiar contrase&ntilde;a</a></li>                                
+                                <li><a href="<?php print base_url()."configuracion/mi_perfil" ?>">Mi perfil</a></li>
+                                <li><a href="<?php print base_url()."configuracion/cambiar_password" ?>">Cambiar contrase&ntilde;a</a></li>
                                 <li class="divider"></li>
-                                -->
                                 <li><a href="<?php print base_url()."login/cerrar_sesion" ?>">Salir</a></li>
                             </ul>
                         </li>                        
@@ -75,30 +76,10 @@
         <script src="<?php print base_url() ?>assets/js/jquery.fs.stepper.min.js"></script>
         <script src="<?php print base_url() ?>assets/js/funciones.js"></script>
         <script src="<?php print base_url() ?>assets/js/jquery.timeago.js"></script>
-        <script>
-            jQuery(document).ready(function() {
-                jQuery("time.timeago").timeago();
-
-                jQuery.timeago.settings.strings = {
-                    prefixAgo: "hace",
-                    prefixFromNow: "dentro de",
-                    suffixAgo: "",
-                    suffixFromNow: "",
-                    seconds: "menos de un minuto",
-                    minute: "un minuto",
-                    minutes: "unos %d minutos",
-                    hour: "una hora",
-                    hours: "%d horas",
-                    day: "un día",
-                    days: "%d días",
-                    month: "un mes",
-                    months: "%d meses",
-                    year: "un año",
-                    years: "%d años"
-                };
-            }); 
-        </script>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="<?php print base_url()."assets/js/jquery.timeago.spanish.js" ?>"></script>
+        <script src="<?php print base_url()."assets/js/highcharts.js" ?>"></script>
+        <script  src="<?php print base_url()."assets/js/validaciones.js" ?>"></script>
+        <script src="<?php print base_url()."assets/js/sweetalert.min.js" ?>"></script>
         
     </body>
 </html>

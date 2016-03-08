@@ -4,11 +4,18 @@
 		<?php 
 			if(isset($ok)){
 		?>
-		<div class="alert alert-success alert-dismissible text-center" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<p><i class="fa fa-check-square-o fa-3x"></i></p> 
-			<p>Las respuestas se han guardado correctamente</p>
-		</div>
+		<script>
+			$(function(){
+
+				swal({
+					title: "Informaci&oacute;n guardada",
+					timer: 1500,
+					type: "success",
+					html: true
+				});
+
+			})
+		</script>
 		<?php
 			}
 		?>
