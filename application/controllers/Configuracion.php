@@ -35,6 +35,8 @@ class Configuracion extends CI_Controller{
 
 		$datos['mi_perfil'] = $this->Usuarios_model->mi_perfil();
 
+		$datos['perfil_view'] = $this->Usuarios_model->perfil_view();
+
 		$datos['contenido_view'] = "configuracion/mi_perfil_view";
 
 		$this->load->view('base_view',$datos);
@@ -47,8 +49,13 @@ class Configuracion extends CI_Controller{
 	public function cambiar_password()
 	{
 
-		
-		
+		if($this->input->post())
+			$datos['ok'] = $this->Usuarios_model->cambiar_password($this->input->post());
+
+		$datos['contenido_view'] = "configuracion/cambiar_password_view";
+
+		$this->load->view('base_view',$datos);
+
 	}
 
 }

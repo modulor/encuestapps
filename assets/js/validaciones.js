@@ -93,45 +93,101 @@
 
 // mi perfil
 
-function validar_mi_perfil()
+function validar_mi_perfil(nivel)
 {
 
 	$(".help-block").empty();
 
-	// email
+	$(".form-group").removeClass('has-error');
 
-	if($("#email").val()==""){		
-		mensajesError("email","Campo obligatorio");
-		return false;
+	switch(nivel){
+
+		// admin
+
+		case '99':
+
+		break;
+
+		// cliente
+
+		case '50':
+
+			// email
+
+			if($("#email").val()==""){		
+				mensajesError("email","Campo obligatorio");
+				return false;
+			}
+
+			// empresa
+
+			if($("#empresa").val()==""){		
+				mensajesError("empresa","Campo obligatorio");
+				return false;
+			}
+
+			// nombre
+
+			if($("#nombre").val()==""){		
+				mensajesError("nombre","Campo obligatorio");
+				return false;
+			}
+
+			// apellidos
+
+			if($("#apellidos").val()==""){		
+				mensajesError("apellidos","Campo obligatorio");
+				return false;
+			}
+
+			// telefono
+
+			if($("#telefono").val()==""){		
+				mensajesError("telefono","Campo obligatorio");
+				return false;
+			}
+
+		break;
+
+		// encuestador
+
+		case '20':
+
+			// email
+
+			if($("#email").val()==""){		
+				mensajesError("email","Campo obligatorio");
+				return false;
+			}
+
+			// nombre
+
+			if($("#nombre").val()==""){		
+				mensajesError("nombre","Campo obligatorio");
+				return false;
+			}
+
+			// apellidos
+
+			if($("#apellidos").val()==""){		
+				mensajesError("apellidos","Campo obligatorio");
+				return false;
+			}
+
+			// telefono
+
+			if($("#telefono").val()==""){		
+				mensajesError("telefono","Campo obligatorio");
+				return false;
+			}
+
+		break;
+
 	}
 
-	// empresa
+			
+	
 
-	if($("#empresa").val()==""){		
-		mensajesError("empresa","Campo obligatorio");
-		return false;
-	}
-
-	// nombre
-
-	if($("#nombre").val()==""){		
-		mensajesError("nombre","Campo obligatorio");
-		return false;
-	}
-
-	// apellidos
-
-	if($("#apellidos").val()==""){		
-		mensajesError("apellidos","Campo obligatorio");
-		return false;
-	}
-
-	// telefono
-
-	if($("#telefono").val()==""){		
-		mensajesError("telefono","Campo obligatorio");
-		return false;
-	}
 
 	return true;
 
@@ -146,3 +202,29 @@ function validar_crear_encuesta()
 	return true;
 
 }
+
+
+// cambiar password
+
+function validar_cambiar_password()
+{
+
+	$(".help-block").empty();
+
+	$(".form-group").removeClass('has-error');
+
+	// password
+
+	if($("#password").val()==""){		
+		mensajesError("password","Campo obligatorio");
+		return false;
+	}
+
+	if($("#password").val()!=$("#password2").val()){		
+		mensajesError("password2","Los passwords no coinciden");
+		return false;
+	}
+
+	return true;
+
+}	
