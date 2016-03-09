@@ -1,10 +1,4 @@
 <div class="form-group">	
-	<label class="control-label">* Email</label>					
-	<input type="text" name="email" id="email" class="form-control" value="<?php print $mi_perfil->email ?>">
-	<span class='help-block' id="email_help"></span>
-</div>
-
-<div class="form-group">	
 	<label class="control-label" for="empresa">* Empresa</label>
 	<input type="text" name="empresa" id="empresa" class="form-control" value="<?php print $mi_perfil->empresa ?>">
 	<span class="help-block" id="empresa_help"></span>

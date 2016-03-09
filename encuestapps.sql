@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-03-2016 a las 00:31:06
+-- Tiempo de generación: 09-03-2016 a las 23:25:05
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -19,9 +19,31 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `encuestapps`
 --
-DROP DATABASE `encuestapps`;
+/*DROP DATABASE `encuestapps`;*/
 CREATE DATABASE IF NOT EXISTS `encuestapps` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `encuestapps`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `campaigns`
+--
+
+DROP TABLE IF EXISTS `campaigns`;
+CREATE TABLE `campaigns` (
+  `campaigns_k` int(11) NOT NULL,
+  `campaign` text NOT NULL,
+  `fecha_hora_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `datos_clientes_k` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `campaigns`
+--
+
+INSERT INTO `campaigns` (`campaigns_k`, `campaign`, `fecha_hora_creacion`, `datos_clientes_k`) VALUES
+(1, 'Campaña Elecciones 2016', '2016-03-09 18:47:50', 1),
+(2, 'Campaña de prueba', '2016-03-09 20:40:16', 1);
 
 -- --------------------------------------------------------
 
@@ -62,7 +84,7 @@ CREATE TABLE `datos_clientes` (
 --
 
 INSERT INTO `datos_clientes` (`datos_clientes_k`, `nombre`, `apellidos`, `telefono`, `empresa`, `direccion`, `celular`, `fecha_hora_registro`, `usuarios_k`) VALUES
-(1, 'Nombre', 'Apellidos', '', 'Nombre Empresa', '', '', '2016-03-02 23:18:39', 2);
+(1, 'Nombre cliente', 'Apellidos cliente', '999999999999999999999', 'Nombre de la empresa', 'direccion del\r\ncliente ...', '55555555555555555553', '2016-03-02 23:18:39', 2);
 
 -- --------------------------------------------------------
 
@@ -115,6 +137,7 @@ CREATE TABLE `encuestas` (
   `encuestas_k` int(11) NOT NULL,
   `nombre_encuesta` varchar(255) NOT NULL,
   `fecha_hora_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `campaigns_k` int(11) DEFAULT NULL,
   `datos_clientes_k` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -122,9 +145,11 @@ CREATE TABLE `encuestas` (
 -- Volcado de datos para la tabla `encuestas`
 --
 
-INSERT INTO `encuestas` (`encuestas_k`, `nombre_encuesta`, `fecha_hora_creacion`, `datos_clientes_k`) VALUES
-(1, 'Elecciones 2016', '2016-03-03 21:26:39', 1),
-(2, 'Encuesta de prueba', '2016-03-03 22:11:05', 1);
+INSERT INTO `encuestas` (`encuestas_k`, `nombre_encuesta`, `fecha_hora_creacion`, `campaigns_k`, `datos_clientes_k`) VALUES
+(1, 'Elecciones 2016', '2016-03-03 21:26:39', 1, 1),
+(2, 'Encuesta de prueba', '2016-03-03 22:11:05', 1, 1),
+(7, 'Encuesta prueba', '2016-03-09 20:45:35', 2, 1),
+(8, 'Encuesta prueba 2', '2016-03-09 20:47:35', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -156,8 +181,8 @@ INSERT INTO `encuestas_preguntas` (`encuestas_preguntas_k`, `pregunta`, `encuest
 (10, 'Tengo una idea de por quien votar, pero cambiaría mi voto si me dieran los argumentos y encontrara razones validas para hacerlo', 1),
 (11, 'Pregunta uno', 2),
 (12, 'Pregunta dos', 2),
-(13, 'pregunta', 3),
-(14, 'pregunta', 4);
+(21, 'pregunta', 7),
+(22, 'pregunta...', 8);
 
 -- --------------------------------------------------------
 
@@ -232,7 +257,15 @@ INSERT INTO `encuestas_preguntas_opciones` (`encuestas_preguntas_opciones_k`, `o
 (53, 'a', 14),
 (54, 'b', 14),
 (55, 'c', 14),
-(56, 'd', 14);
+(56, 'd', 14),
+(81, 'respuesta 1', 21),
+(82, 'respuesta 2', 21),
+(83, 'respuesta 3', 21),
+(84, 'respuesta 4', 21),
+(85, 'respuesta 1...', 22),
+(86, 'respuesta 2...', 22),
+(87, 'respuesta 3...', 22),
+(88, 'respuesta 4...', 22);
 
 -- --------------------------------------------------------
 
@@ -316,7 +349,51 @@ INSERT INTO `encuestas_resultados` (`encuestas_resultados_k`, `encuestas_pregunt
 (61, 27, 0, '2016-03-07 22:50:28'),
 (62, 32, 0, '2016-03-07 22:50:28'),
 (63, 36, 0, '2016-03-07 22:50:28'),
-(64, 38, 0, '2016-03-07 22:50:28');
+(64, 38, 0, '2016-03-07 22:50:28'),
+(65, 42, 0, '2016-03-08 22:52:50'),
+(66, 45, 0, '2016-03-08 22:52:50'),
+(67, 42, 0, '2016-03-08 22:56:18'),
+(68, 45, 0, '2016-03-08 22:56:18'),
+(69, 42, 0, '2016-03-08 22:57:06'),
+(70, 45, 0, '2016-03-08 22:57:06'),
+(71, 42, 0, '2016-03-08 22:57:35'),
+(72, 45, 0, '2016-03-08 22:57:35'),
+(73, 42, 0, '2016-03-08 22:57:45'),
+(74, 45, 0, '2016-03-08 22:57:46'),
+(75, 42, 0, '2016-03-08 22:58:15'),
+(76, 45, 0, '2016-03-08 22:58:15'),
+(77, 42, 0, '2016-03-08 22:58:17'),
+(78, 45, 0, '2016-03-08 22:58:17'),
+(79, 41, 0, '2016-03-08 22:58:21'),
+(80, 45, 0, '2016-03-08 22:58:21'),
+(81, 41, 0, '2016-03-08 22:58:25'),
+(82, 45, 0, '2016-03-08 22:58:25'),
+(83, 44, 0, '2016-03-08 22:58:37'),
+(84, 46, 0, '2016-03-08 22:58:37'),
+(90, 1, 0, '2016-03-09 20:55:51'),
+(91, 7, 0, '2016-03-09 20:55:51'),
+(92, 11, 0, '2016-03-09 20:55:51'),
+(93, 14, 0, '2016-03-09 20:55:51'),
+(94, 19, 0, '2016-03-09 20:55:51'),
+(95, 21, 0, '2016-03-09 20:55:51'),
+(96, 25, 0, '2016-03-09 20:55:51'),
+(97, 29, 0, '2016-03-09 20:55:51'),
+(98, 33, 0, '2016-03-09 20:55:51'),
+(99, 38, 0, '2016-03-09 20:55:51'),
+(100, 42, 0, '2016-03-09 20:56:14'),
+(101, 45, 0, '2016-03-09 20:56:14'),
+(102, 82, 0, '2016-03-09 20:58:24'),
+(103, 81, 0, '2016-03-09 21:00:23'),
+(104, 81, 0, '2016-03-09 21:04:28'),
+(105, 82, 0, '2016-03-09 21:04:38'),
+(106, 82, 0, '2016-03-09 21:04:58'),
+(107, 82, 0, '2016-03-09 21:05:23'),
+(108, 86, 0, '2016-03-09 21:07:49'),
+(109, 87, 0, '2016-03-09 21:08:11'),
+(110, 87, 0, '2016-03-09 21:13:47'),
+(111, 43, 0, '2016-03-09 21:14:07'),
+(112, 46, 0, '2016-03-09 21:14:07'),
+(113, 88, 0, '2016-03-09 21:14:21');
 
 -- --------------------------------------------------------
 
@@ -367,6 +444,13 @@ INSERT INTO `usuarios_niveles` (`usuarios_niveles_k`, `nombre_nivel`) VALUES
 --
 
 --
+-- Indices de la tabla `campaigns`
+--
+ALTER TABLE `campaigns`
+  ADD PRIMARY KEY (`campaigns_k`),
+  ADD KEY `datos_clientes_k` (`datos_clientes_k`);
+
+--
 -- Indices de la tabla `datos_administradores`
 --
 ALTER TABLE `datos_administradores`
@@ -399,7 +483,7 @@ ALTER TABLE `datos_encuestados`
 --
 ALTER TABLE `encuestas`
   ADD PRIMARY KEY (`encuestas_k`),
-  ADD KEY `datos_clientes_k` (`datos_clientes_k`);
+  ADD KEY `datos_clientes_k` (`campaigns_k`);
 
 --
 -- Indices de la tabla `encuestas_preguntas`
@@ -441,6 +525,11 @@ ALTER TABLE `usuarios_niveles`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `campaigns`
+--
+ALTER TABLE `campaigns`
+  MODIFY `campaigns_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT de la tabla `datos_administradores`
 --
 ALTER TABLE `datos_administradores`
@@ -464,22 +553,22 @@ ALTER TABLE `datos_encuestados`
 -- AUTO_INCREMENT de la tabla `encuestas`
 --
 ALTER TABLE `encuestas`
-  MODIFY `encuestas_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `encuestas_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `encuestas_preguntas`
 --
 ALTER TABLE `encuestas_preguntas`
-  MODIFY `encuestas_preguntas_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `encuestas_preguntas_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `encuestas_preguntas_opciones`
 --
 ALTER TABLE `encuestas_preguntas_opciones`
-  MODIFY `encuestas_preguntas_opciones_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `encuestas_preguntas_opciones_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 --
 -- AUTO_INCREMENT de la tabla `encuestas_resultados`
 --
 ALTER TABLE `encuestas_resultados`
-  MODIFY `encuestas_resultados_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `encuestas_resultados_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
@@ -490,6 +579,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `usuarios_niveles`
   MODIFY `usuarios_niveles_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `encuestas_preguntas`
+--
+ALTER TABLE `encuestas_preguntas`
+  ADD CONSTRAINT `restriccion` FOREIGN KEY (`encuestas_k`) REFERENCES `encuestas` (`encuestas_k`) ON DELETE CASCADE ON UPDATE CASCADE;

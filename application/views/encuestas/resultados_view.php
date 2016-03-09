@@ -1,6 +1,9 @@
 <div class="row">
-	<div class="col-lg-12">
-		<h3 class="page-header text-center"><?php print $encuesta->nombre_encuesta ?></h3>
+	<div class="col-lg-12 text-center">
+		<h1 class="page-header">
+			<?php print $encuesta->nombre_encuesta ?><br>
+			<a href="<?php print base_url()."encuestas/mis_encuestas/".$encuesta->campaigns_k ?>" class="btn btn-info"><i class="fa fa-check-square-o"></i> Lista de encuestas</a>
+		</h1>
 	</div>
 </div>
 
@@ -13,7 +16,7 @@
 		<!-- preguntas -->		
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<h2 class="panel-title"><?php print $pregunta->pregunta ?></h2>
+				<h2 class="panel-title"><?php print $pregunta->pregunta ?></h2>				
 			</div>
 			<ul class="list-group">
 				<!-- respuestas -->
@@ -105,12 +108,12 @@
 			            x: -20
 			        },
 			        xAxis: {
-			            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-			                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+			            categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+			                'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
 			        },
 			        yAxis: {
 			            title: {
-			                text: 'Temperature (°C)'
+			                text: 'Votos'
 			            },
 			            plotLines: [{
 			                value: 0,
@@ -119,7 +122,7 @@
 			            }]
 			        },
 			        tooltip: {
-			            valueSuffix: '°C'
+			            valueSuffix: ''
 			        },
 			        legend: {
 			            layout: 'vertical',
@@ -128,16 +131,16 @@
 			            borderWidth: 0
 			        },
 			        series: [{
-			            name: 'Tokyo',
-			            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+			            name: 'A',
+			            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 25.3, 28.9, 29.6]
 			        }, {
-			            name: 'New York',
-			            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+			            name: 'B',
+			            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 15.6, 16.5]
 			        }, {
-			            name: 'Berlin',
+			            name: 'C',
 			            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
 			        }, {
-			            name: 'London',
+			            name: 'D',
 			            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
 			        }]
 			    });

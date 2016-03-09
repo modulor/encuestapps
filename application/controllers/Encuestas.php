@@ -52,7 +52,7 @@ class Encuestas extends CI_Controller{
 
 	// crear encuesta nueva
 
-	public function crear()
+	public function crear($campaigns_k = "")
 	{
 
 		if($this->session->userdata('nivel')<50)
@@ -64,13 +64,15 @@ class Encuestas extends CI_Controller{
 
 			$datos['ok'] = $this->Encuestas_model->crear($this->input->post());
 
-			redirect(base_url()."encuestas/mis_encuestas","refresh");
+			redirect(base_url()."encuestas/mis_encuestas/".$campaigns_k,"refresh");
 
 		else:
 
 			// obtener datos_clientes_k
 	 
 			$datos['datos_clientes_k'] = $this->Usuarios_model->get_datos_clientes_k($this->session->userdata("usuarios_k"));
+
+			$datos['campaigns_k'] = $campaigns_k;
 
 			$datos['contenido_view'] = "encuestas/crear_view";
 
@@ -95,14 +97,14 @@ class Encuestas extends CI_Controller{
 
 	// mis encuestas 
 
-	public function mis_encuestas()
-	{
+	public function mis_encuestas($campaigns_k = "")
+	{		
 
-		// obtener datos_clientes_k
- 
-		$datos_clientes_k = $this->Usuarios_model->get_datos_clientes_k($this->session->userdata("usuarios_k"));
+		$this->load->model("Campaigns_model");
 
-		$datos['encuestas'] = $this->Encuestas_model->mis_encuestas($datos_clientes_k);
+		$datos['campaign'] = $this->Campaigns_model->info_campaign($campaigns_k);
+
+		$datos['encuestas'] = $this->Encuestas_model->mis_encuestas($campaigns_k);
 
 		$datos['contenido_view'] = "encuestas/mis_encuestas_view";
 

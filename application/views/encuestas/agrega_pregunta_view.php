@@ -23,6 +23,7 @@
 	<div class="form-group">
 		<label>Pregunta</label>
 		<input type="text" name="pregunta_<?php print $indice ?>" id="pregunta_<?php print $indice ?>" class="form-control" placeholder="escriba aqu&iacute; su pregunta...">
+		<span class="help-block" id="pregunta_<?php print $indice ?>_help"></span>
 	</div>			
 
 	<div class="form-group">
@@ -31,6 +32,7 @@
 			<span class="input-group-addon">A</span>
 			<input type="text" name="respuesta_1_p<?php print $indice ?>" id="respuesta_1_p<?php print $indice ?>" class="form-control" placeholder="capture su respuesta...">
 		</div>
+		<span class="help-block text-danger" id="respuesta_1_p<?php print $indice ?>_help"></span>
 	</div>
 
 	<div class="form-group">
@@ -38,6 +40,7 @@
 			<span class="input-group-addon">B</span>
 			<input type="text" name="respuesta_2_p<?php print $indice ?>" id="respuesta_2_p<?php print $indice ?>" class="form-control" placeholder="capture su respuesta...">
 		</div>
+		<span class="help-block text-danger" id="respuesta_2_p<?php print $indice ?>_help"></span>
 	</div>
 
 	<div class="form-group">
@@ -45,6 +48,7 @@
 			<span class="input-group-addon">C</span>
 			<input type="text" name="respuesta_3_p<?php print $indice ?>" id="respuesta_3_p<?php print $indice ?>" class="form-control" placeholder="capture su respuesta...">
 		</div>
+		<span class="help-block text-danger" id="respuesta_3_p<?php print $indice ?>_help"></span>
 	</div>
 
 	<div class="form-group">
@@ -52,6 +56,7 @@
 			<span class="input-group-addon">D</span>
 			<input type="text" name="respuesta_4_p<?php print $indice ?>" id="respuesta_4_p<?php print $indice ?>" class="form-control" placeholder="capture su respuesta...">
 		</div>
+		<span class="help-block text-danger" id="respuesta_4_p<?php print $indice ?>_help"></span>
 	</div>	
 </li>
 <!-- pregunta fin -->

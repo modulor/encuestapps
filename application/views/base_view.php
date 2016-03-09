@@ -30,6 +30,7 @@
 
     <!-- jquery -->
     <script src="<?php print base_url() ?>assets/js/jquery-1.10.1.min.js"></script>
+    <script>var base_url = "<?php print base_url() ?>"</script>
 
     </head>
     <body>
@@ -49,7 +50,7 @@
                     <ul class="nav navbar-nav navbar-right">                        
                         <?php $this->load->view($this->session->userdata("menu_principal")) ?>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mi cuenta <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php print $this->session->userdata("email") ?> <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li class="dropdown-header">Configuraci&oacute;n</li>
                                 <li><a href="<?php print base_url()."configuracion/mi_perfil" ?>">Mi perfil</a></li>
@@ -63,7 +64,7 @@
             </div>
         </nav>     
 
-        <div class="container-fluid">            
+        <div class="container-fluid">       
             <div class="row">
                 <div class="col-lg-12"><?php $this->load->view($contenido_view) ?></div>
             </div>

@@ -25,6 +25,24 @@ class Usuarios extends CI_Controller{
 	}
 
 
+	// validar un email cuando cambia en editar perfil
+
+	public function validar_no_existe_email()
+	{
+
+		$email = $_POST['email'];
+		$email_old = $_POST['email_old'];
+
+		if($this->Usuarios_model->existe_email($email,$email_old))
+			$data['respuesta'] = "si";
+		else
+			$data['respuesta'] = "no";
+
+        print json_encode($data);  
+
+	}
+
+
 	
 
 }

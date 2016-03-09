@@ -65,9 +65,39 @@ hr.hr-divider{
 
 
 /*** tables ***/
+
 ul.list-group>li.list-group-item:nth-of-type(even) {
 	background-color: #F5F5F5;
 }
+
+/*** ***/
+
+
+/*** text danger ***/
+
+.text-center.help-block.text-danger,
+.help-block.text-danger{
+	color: #da4453;	
+}
+
+/*** ***/
+
+
+/*** title campaign encuesta ***/
+
+.titulo-campaign-encuesta h3,
+.titulo-campaign-encuesta h1{
+	margin: 0;
+}
+
+.titulo-campaign-encuesta h3{
+	margin-top: 40px;
+}
+
+.titulo-campaign-encuesta h1{
+	margin-bottom: 20px;
+}
+
 /*** ***/
 
 

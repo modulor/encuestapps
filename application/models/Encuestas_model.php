@@ -9,7 +9,8 @@ class Encuestas_model extends CI_Model{
 
 		$data_encuestas = array(
 			'nombre_encuesta' => $datos['nombre_encuesta'],
-			'datos_clientes_k' => $datos['datos_clientes_k']
+			'datos_clientes_k' => $datos['datos_clientes_k'],
+			'campaigns_k' => $datos['campaigns_k']
 		);
 
 		$insert_encuestas = $this->db->insert("encuestas",$data_encuestas);
@@ -53,10 +54,10 @@ class Encuestas_model extends CI_Model{
 	}
 
 
-	public function mis_encuestas($datos_clientes_k)
+	public function mis_encuestas($campaigns_k)
 	{
 
-		return $query = $this->db->where("datos_clientes_k",$datos_clientes_k)
+		return $query = $this->db->where("campaigns_k",$campaigns_k)
 		->order_by("fecha_hora_creacion","desc")
 		->get("encuestas")
 		->result();

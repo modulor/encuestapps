@@ -207,7 +207,7 @@ class Login extends CI_Controller {
             case 50:
 
                 $datos_sesion['menu_principal'] = "menu/menu_cliente_view";
-                $controlador = "encuestas/mis_encuestas";
+                $controlador = "campaigns/my_campaigns";
 
             break;
 
@@ -217,7 +217,7 @@ class Login extends CI_Controller {
             case 20:
 
                 $datos_sesion['menu_principal'] = "menu/menu_encuestador_view";
-                $controlador = "encuestas/mis_encuestas";
+                $controlador = "campaigns/my_campaigns";
 
             break;                            
             

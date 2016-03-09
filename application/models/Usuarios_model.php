@@ -226,6 +226,27 @@ class Usuarios_model extends CI_Model{
 
     }
 
+
+    // determina si existe un email ya guardado en "usuarios"
+
+    public function existe_email($email,$email_old)
+    {
+
+        if($email == $email_old)
+            return false;
+
+        $buscar = $this->db->select("email")
+        ->where("email",$email)
+        ->get("usuarios")
+        ->num_rows();
+
+        if($buscar > 0)
+            return true;
+
+        return false;
+
+    }
+
 }
 
 ?>
