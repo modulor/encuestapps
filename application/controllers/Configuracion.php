@@ -41,6 +41,16 @@ class Configuracion extends CI_Controller{
 
 	}
 
+
+	// cambiar password
+
+	public function cambiar_password()
+	{
+
+		
+		
+	}
+
 }
 
 ?>
