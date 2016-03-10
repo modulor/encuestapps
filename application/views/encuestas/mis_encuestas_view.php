@@ -22,9 +22,19 @@
 				
 				<p>No existen encuestas registradas</p>
 
+				<?php
+					if($this->session->userdata("nivel")==50){
+				?>
+
 				<p>
 					<a href="<?php print base_url()."encuestas/crear/".$campaign->campaigns_k ?>" class="btn btn-info">Crear encuesta</a>
 				</p>
+
+				<?php 
+
+					}
+
+				?>
 
 			</div>
 

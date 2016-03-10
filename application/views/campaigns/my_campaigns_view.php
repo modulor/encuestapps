@@ -16,9 +16,17 @@
 
 				<p>No hay campa&ntilde;as registradas</p>
 
+				<?php
+					if($this->session->userdata("nivel")==50){
+				?>
+
 				<p>
 					<a href="<?php print base_url()."campaigns/new_campaign" ?>" class="btn btn-info">Crear campa&ntilde;a</a>
 				</p>
+
+				<?php
+					}
+				?>
 
 			</div>
 
