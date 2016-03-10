@@ -4,11 +4,33 @@
 		<h1 class="text-center page-header">Mis campa&ntilde;as</h1>
 
 		<div class="row">
+
 			<!-- encuesta -->
 			<?php 
-				foreach($campaigns as $campaign):
+
+				if(sizeof($campaigns)==0):
+
 			?>
+
+			<div class="col-sm-12 text-center">
+
+				<p>No hay campa&ntilde;as registradas</p>
+
+				<p>
+					<a href="<?php print base_url()."campaigns/new_campaign" ?>" class="btn btn-info">Crear campa&ntilde;a</a>
+				</p>
+
+			</div>
+
+			<?php
+
+				else:
+
+					foreach($campaigns as $campaign):
+			?>
+
 			<div class="col-sm-6">
+			
 				<div class="thumbnail text-center">
 					<p class="text-right">
 						<a title="borrar campa&ntilde;a" href="<?php print base_url()."campaigns/delete_campaign/".$campaign->campaigns_k ?>" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></a>
@@ -33,11 +55,17 @@
 						</p>
 					</div>
 				</div>
-			</div>
+			
 			<?php 
-				endforeach;
+					
+					endforeach;
+
+				endif;
+
 			?>
 			<!-- encuesta fin -->
+
+			</div>
 		</div>
 		
 	</div>

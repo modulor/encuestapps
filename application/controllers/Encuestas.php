@@ -131,6 +131,24 @@ class Encuestas extends CI_Controller{
 
 	}
 
+
+	//  borrar encuesta
+
+	public function borrar($encuestas_k="")
+	{
+
+		$datos['encuesta'] = $this->Encuestas_model->get_encuesta($encuestas_k);
+
+		if($this->input->post())
+
+			$datos['ok'] = $this->Encuestas_model->borrar($encuestas_k);
+
+		$datos['contenido_view'] = "encuestas/borrar_view";
+
+		$this->load->view("base_view",$datos);
+
+	}
+
 }
 
 ?>
