@@ -1,8 +1,8 @@
-jQuery(document).ready(function() {
+$(document).ready(function() {
 
-    jQuery("time.timeago").timeago();
+    $("time.timeago").timeago();
 
-    jQuery.timeago.settings.strings = {
+    $.timeago.settings.strings = {
         prefixAgo: "hace",
         prefixFromNow: "dentro de",
         suffixAgo: "",

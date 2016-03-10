@@ -23,7 +23,7 @@
 				<button class="btn btn-info btn-block btn-lg">Guardar</button>
 			</div>
 
-			<p class="help-block">* todos los campos son obligatorios</p>
+			<p class="text-muted">* todos los campos son obligatorios</p>
 
 		</form>	
 		

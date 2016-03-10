@@ -131,6 +131,11 @@ function validar_mi_perfil(nivel)
 				return false;
 			}
 
+			if(!validarEmail($("#email").val())){		
+				mensajesError("email","El email <strong>'"+$("#email").val()+"'</strong> no es v&aacute;lido");
+				errores++;
+			}
+
 			// empresa
 
 			if($("#empresa").val()==""){		
@@ -172,6 +177,11 @@ function validar_mi_perfil(nivel)
 				return false;
 			}
 
+			if(!validarEmail($("#email").val())){		
+				mensajesError("email","El email <strong>'"+$("#email").val()+"'</strong> no es v&aacute;lido");
+				errores++;
+			}
+
 			// nombre
 
 			if($("#nombre").val()==""){		
@@ -186,10 +196,17 @@ function validar_mi_perfil(nivel)
 				return false;
 			}
 
-			// telefono
+			// celular
 
-			if($("#telefono").val()==""){		
-				mensajesError("telefono","Campo obligatorio");
+			if($("#celular").val()==""){		
+				mensajesError("celular","Campo obligatorio");
+				return false;
+			}
+
+			// direccion
+
+			if($("#direccion").val()==""){		
+				mensajesError("direccion","Campo obligatorio");
 				return false;
 			}
 
@@ -283,7 +300,7 @@ function validar_cambiar_password()
 	}
 
 	if($("#password").val()!=$("#password2").val()){		
-		mensajesError("password2","Los passwords no coinciden");
+		mensajesError("password2","Las contrase&ntilde;as no coinciden");
 		return false;
 	}
 
@@ -368,6 +385,93 @@ function validar_crear_campaign()
 		swal({
 			title: "Oops...",
 			text: "Todos los campos son obligatorios",
+			timer: 3500,
+			type: "error"
+		});
+
+		return false;
+
+	}		
+
+	return true;
+
+}
+
+
+// encuestador
+
+function validar_encuestador()
+{
+
+	// vaciar errores
+
+	$(".help-block").empty();
+
+	$(".has-error").removeClass('has-error');
+
+	var errores = 0;
+
+	// email
+
+	if($("#email").val()==""){		
+		mensajesError("email","Campo obligatorio");
+		errores++;
+	}
+
+	if(!validarEmail($("#email").val())){		
+		mensajesError("email","El email <strong>'"+$("#email").val()+"'</strong> no es v&aacute;lido");
+		errores++;
+	}
+
+	// password
+
+	if($("#password").val()==""){		
+		mensajesError("password","Campo obligatorio");
+		errores++;
+	}
+
+	// password2
+
+	if($("#password2").val()!=$("#password").val()){		
+		mensajesError("password2","Las contrase&ntilde;as no coinciden");
+		errores++;
+	}
+
+	// nombre
+
+	if($("#nombre").val()==""){		
+		mensajesError("nombre","Campo obligatorio");
+		errores++;
+	}
+
+	// apellidos
+
+	if($("#apellidos").val()==""){		
+		mensajesError("apellidos","Campo obligatorio");
+		errores++;
+	}
+
+	// celular
+
+	if($("#celular").val()==""){		
+		mensajesError("celular","Campo obligatorio");
+		errores++;
+	}
+
+	// direccion
+
+	if($("#direccion").val()==""){		
+		mensajesError("direccion","Campo obligatorio");
+		errores++;
+	}
+
+	// swal alert
+
+	if(errores > 0){
+
+		swal({
+			title: "Oops...",
+			text: "Por favor verifica los campos obligatorios",
 			timer: 3500,
 			type: "error"
 		});

@@ -44,7 +44,7 @@ class Login extends CI_Controller {
 
                         // cuenta de usuario "inactiva"
 
-                        $data['error'] = "Su cuenta a&uacute;n no ha sido activada";
+                        $data['error'] = "Su cuenta se encuentra <strong>inactiva</strong>";
                         $data['contenido_view'] = "login_view";
                         $this->load->view('login_view', $data);
 

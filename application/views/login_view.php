@@ -17,6 +17,7 @@
     <!-- font awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
+
     <!--<link rel="shortcut icon" href="img/favicon.ico">-->
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
@@ -29,8 +30,14 @@
     <body class="body-login">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">                    
+
                     <form action="<?php print base_url()."login" ?>" method="post" class="login-form">
+
+                        <div class="form-group text-center">                            
+                            <i class="fa fa-user fa-4x"></i>
+                        </div>
+
                         <div class="form-group">
                             <input type="text" class="form-control login-field" value="" placeholder="Correo electr&oacute;nico" id="email-login" name="email" autofocus />
                         </div>
@@ -43,7 +50,9 @@
 
                     </form>
 
-                    <?php if(isset($error)) print $error; ?>
+                    <div class="alert alert-danger text-center" role="alert">
+                        <?php if(isset($error)) print $error; ?>
+                    </div>                        
                 </div>
             </div>
         </div>

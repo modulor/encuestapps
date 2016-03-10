@@ -12,6 +12,8 @@
 
     <!-- bootflat -->
     <link href="<?php print base_url() ?>assets/css/bootflat.css" rel="stylesheet">
+    
+    <!-- custom -->
     <link href="<?php print base_url() ?>assets/css/custom.css" rel="stylesheet">
 
     <!-- font awesome -->
@@ -19,6 +21,9 @@
 
     <!-- sweet alert -->
     <link rel="stylesheet" href="<?php print base_url()."assets/css/sweetalert.css" ?>">
+
+    <!-- datatables -->
+    <link rel="stylesheet" type="text/css" href="<?php print base_url()."assets/datatables/datatables.min.css" ?>"/>
 
     <!--<link rel="shortcut icon" href="img/favicon.ico">-->
 
@@ -75,12 +80,13 @@
         <script src="<?php print base_url() ?>assets/js/icheck.min.js"></script>        
         <script src="<?php print base_url() ?>assets/js/jquery.fs.selecter.min.js"></script>
         <script src="<?php print base_url() ?>assets/js/jquery.fs.stepper.min.js"></script>
-        <script src="<?php print base_url() ?>assets/js/funciones.js"></script>
+        <script src="<?php print base_url() ?>assets/js/funciones.js"></script>        
+        <script src="<?php print base_url()."assets/js/highcharts.js" ?>"></script>
+        <script src="<?php print base_url()."assets/js/validaciones.js" ?>"></script>
+        <script src="<?php print base_url()."assets/js/sweetalert.min.js" ?>"></script>
+        <script src="<?php print base_url()."assets/datatables/datatables.min.js" ?>"></script>
         <script src="<?php print base_url() ?>assets/js/jquery.timeago.js"></script>
         <script src="<?php print base_url()."assets/js/jquery.timeago.spanish.js" ?>"></script>
-        <script src="<?php print base_url()."assets/js/highcharts.js" ?>"></script>
-        <script  src="<?php print base_url()."assets/js/validaciones.js" ?>"></script>
-        <script src="<?php print base_url()."assets/js/sweetalert.min.js" ?>"></script>
         
     </body>
 </html>

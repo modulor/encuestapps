@@ -41,10 +41,6 @@
 						$this->load->view("configuracion/mi_perfil/".$perfil_view);
 
 					?>
-
-					<div class="form-group">
-						<p class="help-block">* campos obligatorios</p>
-					</div>
 				</div>
 			</div>
 
@@ -53,6 +49,8 @@
 			<div class="form-group">
 				<button name="btn_guardar" class="btn btn-info btn-block btn-lg">Guardar</button>
 			</div>
+
+			<p class="text-muted">* campos obligatorios</p>
 
 		</form>
 	</div>

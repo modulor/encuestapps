@@ -82,13 +82,9 @@ class Campaigns extends CI_Controller{
 	{
 
 		if($this->input->post())
-
 			$datos['ok'] = $this->Campaigns_model->delete_campaign($campaigns_k);
-
-		else{
-
+		else
 			$datos['campaign'] = $this->Campaigns_model->info_campaign($campaigns_k);
-		}
 
 		$datos['contenido_view'] = "campaigns/delete_campaign_view";
 
