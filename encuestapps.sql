@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-03-2016 a las 00:28:40
+-- Tiempo de generación: 11-03-2016 a las 17:05:08
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `encuestapps`
 --
-CREATE DATABASE IF NOT EXISTS `encuestapps` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `encuestapps`;
 
 -- --------------------------------------------------------
 
@@ -35,6 +33,13 @@ CREATE TABLE `campaigns` (
   `fecha_hora_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `datos_clientes_k` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `campaigns`
+--
+
+INSERT INTO `campaigns` (`campaigns_k`, `campaign`, `fecha_hora_creacion`, `datos_clientes_k`) VALUES
+(10, 'Campaña Elecciones 2016', '2016-03-10 00:08:34', 1);
 
 -- --------------------------------------------------------
 
@@ -100,7 +105,7 @@ CREATE TABLE `datos_encuestadores` (
 --
 
 INSERT INTO `datos_encuestadores` (`datos_encuestadores_k`, `nombre`, `apellidos`, `celular`, `direccion`, `telefono`, `datos_clientes_k`, `usuarios_k`) VALUES
-(1, 'Juan', 'Martinez', '', '', '', 1, 1);
+(1, 'Juan', 'Martinez', '156', 'nombre de la calle #00\r\ncolonia\r\nciudad\r\nestado\r\npais', '', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -132,6 +137,13 @@ CREATE TABLE `encuestas` (
   `datos_clientes_k` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `encuestas`
+--
+
+INSERT INTO `encuestas` (`encuestas_k`, `nombre_encuesta`, `fecha_hora_creacion`, `campaigns_k`, `datos_clientes_k`) VALUES
+(17, 'elecciones 2016', '2016-03-10 00:08:41', 10, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -144,6 +156,13 @@ CREATE TABLE `encuestas_preguntas` (
   `pregunta` text NOT NULL,
   `encuestas_k` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `encuestas_preguntas`
+--
+
+INSERT INTO `encuestas_preguntas` (`encuestas_preguntas_k`, `pregunta`, `encuestas_k`) VALUES
+(31, 'pregunta', 17);
 
 -- --------------------------------------------------------
 
@@ -158,6 +177,16 @@ CREATE TABLE `encuestas_preguntas_opciones` (
   `encuestas_preguntas_k` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `encuestas_preguntas_opciones`
+--
+
+INSERT INTO `encuestas_preguntas_opciones` (`encuestas_preguntas_opciones_k`, `opcion`, `encuestas_preguntas_k`) VALUES
+(33, 'respuesta 1', 31),
+(34, 'respuesta 2', 31),
+(35, 'respuesta 3', 31),
+(36, 'respuesta 4', 31);
+
 -- --------------------------------------------------------
 
 --
@@ -171,6 +200,13 @@ CREATE TABLE `encuestas_resultados` (
   `datos_encuestados_k` int(11) NOT NULL,
   `fecha_hora_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `encuestas_resultados`
+--
+
+INSERT INTO `encuestas_resultados` (`encuestas_resultados_k`, `encuestas_preguntas_opciones_k`, `datos_encuestados_k`, `fecha_hora_creacion`) VALUES
+(5, 34, 0, '2016-03-10 00:08:51');
 
 -- --------------------------------------------------------
 
@@ -305,7 +341,7 @@ ALTER TABLE `usuarios_niveles`
 -- AUTO_INCREMENT de la tabla `campaigns`
 --
 ALTER TABLE `campaigns`
-  MODIFY `campaigns_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `campaigns_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `datos_administradores`
 --
@@ -330,22 +366,22 @@ ALTER TABLE `datos_encuestados`
 -- AUTO_INCREMENT de la tabla `encuestas`
 --
 ALTER TABLE `encuestas`
-  MODIFY `encuestas_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `encuestas_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT de la tabla `encuestas_preguntas`
 --
 ALTER TABLE `encuestas_preguntas`
-  MODIFY `encuestas_preguntas_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `encuestas_preguntas_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT de la tabla `encuestas_preguntas_opciones`
 --
 ALTER TABLE `encuestas_preguntas_opciones`
-  MODIFY `encuestas_preguntas_opciones_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `encuestas_preguntas_opciones_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT de la tabla `encuestas_resultados`
 --
 ALTER TABLE `encuestas_resultados`
-  MODIFY `encuestas_resultados_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `encuestas_resultados_k` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
