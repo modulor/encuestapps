@@ -47,7 +47,8 @@
 					<div class="caption">						
 						<h3><?php print $campaign->campaign ?></h3>						
 						<p>
-							<i class="fa fa-clock-o"></i> <time title="<?php print $campaign->fecha_hora_creacion ?>" class="timeago" datetime="<?php print $campaign->fecha_hora_creacion ?>"></time>
+							<i class="fa fa-clock-o"></i> <time title="<?php print $campaign->fecha_hora_creacion ?>" class="timeago" datetime="<?php print $campaign->fecha_hora_creacion ?>"></time><br>
+							<span class="fecha-hora-creacion"><?php print getOnlyDateNormal($campaign->fecha_hora_creacion) ?></span>
 						</p>
 						<p>							
 

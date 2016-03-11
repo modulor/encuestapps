@@ -1,9 +1,54 @@
 <div class="row">
 	<div class="col-lg-12 text-center">
 		<h1 class="page-header">
-			<?php print $encuesta->nombre_encuesta ?><br>
-			<a href="<?php print base_url()."encuestas/mis_encuestas/".$encuesta->campaigns_k ?>" class="btn btn-info"><i class="fa fa-check-square-o"></i> Lista de encuestas</a>
+			<?php print $encuesta->nombre_encuesta ?><br>			
 		</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-3">
+		<p>&nbsp;</p>
+		<p><a href="<?php print base_url()."encuestas/mis_encuestas/".$encuesta->campaigns_k ?>" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Lista de encuestas</a></p>
+	</div>
+	<div class="col-sm-6">
+		<div class="panel">
+			<div class="panel-body">
+				<form action="<?php print base_url()."encuestas/resultados/".$encuesta->encuestas_k ?>" method="post" onsubmit="return valida_buscar_resultados_encuesta();">
+					<div class="row">
+						<div class="col-xs-9">
+							<div class="form-group">
+								<div class="input-daterange input-group" id="datepicker">
+								    <input type="text" class="form-control" name="fecha_inicio" id="fecha_inicio" value="<?php print $fecha_inicio ?>" />
+								    <span class="input-group-addon">a</span>
+								    <input type="text" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php print $fecha_fin ?>" />
+								</div>
+							</div>						
+						</div>
+						<div class="col-xs-3 text-right">
+							<button type="submit" class="btn btn-primary btn-block">Buscar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(function(){
+
+			$('.input-daterange').datepicker({
+			    startDate: "2015-10-01",
+			    endDate: "2016-03-11",
+			    multidate: false,
+			    language: 'es',
+			    format: "yyyy-mm-dd",
+			});
+
+		})
+	</script>
+	<div class="col-sm-3 text-right text-right-not-xs">
+		<p>&nbsp;</p>
+		<p><a href="<?php print base_url()."encuestas/crear/".$encuesta->campaigns_k ?>" class="btn btn-info"><i class="fa fa-plus"></i> Crear encuesta</a></p>
 	</div>
 </div>
 
@@ -31,7 +76,7 @@
 				?>
 				<li class="list-group-item">
 
-					<span class="badge badge-primary"><?php $votos = $this->Encuestas_model->get_votos_pregunta($opcion->encuestas_preguntas_opciones_k); print $votos ?></span>
+					<span class="badge badge-primary"><?php $votos = $this->Encuestas_model->get_votos_pregunta($opcion->encuestas_preguntas_opciones_k, $fecha_inicio, $fecha_fin); print $votos ?></span>
 
 					<?php  print $opcion->opcion; ?>
 				</li>

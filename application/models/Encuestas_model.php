@@ -136,13 +136,28 @@ class Encuestas_model extends CI_Model{
 	}
 
 
-	public function get_votos_pregunta($encuestas_preguntas_opciones_k)
+	public function get_votos_pregunta($encuestas_preguntas_opciones_k, $fecha_inicio, $fecha_fin)
 	{
 
-		return $query = $this->db->select("encuestas_resultados_k")
+		$this->db->select("encuestas_resultados_k");
+		$this->db->from("encuestas_resultados");
+		$this->db->where("encuestas_preguntas_opciones_k",$encuestas_preguntas_opciones_k);
+
+
+		if($fecha_inicio != ""){
+
+			$this->db->where("fecha_hora_creacion >=",$fecha_inicio." 00:00:00");
+			$this->db->where("fecha_hora_creacion <=",$fecha_fin." 00:00:00");
+
+		}
+
+		return $query = $this->db->get()
+		->num_rows();
+
+		/*return $query = $this->db->select("encuestas_resultados_k")
 		->where("encuestas_preguntas_opciones_k",$encuestas_preguntas_opciones_k)
 		->get('encuestas_resultados')
-		->num_rows();
+		->num_rows();*/
 
 	}
 

@@ -1,14 +1,45 @@
-/* agregar pregunta a encuesta */
+/* agregar pregunta o respuesta a una encuesta */
 
-function agrega_pregunta(url,elemento){
+function agrega_elemento_encuesta(url,elemento,tipo,num_pregunta){
 
-	var indice = parseInt($("#num_preguntas").val()) + 1;
+	// tipo: preguntas | respuestas
 
-	// aumentamos el num_preguntas
+	switch(tipo){
 
-	$("#num_preguntas").val(indice);
+		case 'preguntas':
 
-	var la_url = url+'/'+indice;
+			// obtenemos el indice actual
+
+			var indice = parseInt($("#num_"+tipo).val()) + 1;
+
+			// aumentamos el num_+tipo
+
+			$("#num_"+tipo).val(indice);
+
+			// url 
+
+			var la_url = url+indice;
+
+		break;
+
+
+		case 'respuestas':
+
+			// obtenemos el indice actual
+
+			var indice = parseInt($("#num_"+tipo+"_"+num_pregunta).val()) + 1;
+
+			// aumentamos el num_+tipo
+
+			$("#num_"+tipo+"_"+num_pregunta).val(indice);
+
+			// url
+
+			var la_url = url+indice+'/'+num_pregunta;
+
+		break;
+
+	}		
 
 	$.get(la_url, function(result) {
 	    $(elemento).append(result);

@@ -252,6 +252,8 @@ function validar_crear_encuesta()
 
 		// revisar inputs de respuestas
 
+		//for(var r = 1; r <= $("#num_respuestas_"+i).val(); r++){
+
 		for(var r = 1; r <= 4; r++){
 
 			// respuesta_1_p1
@@ -260,6 +262,17 @@ function validar_crear_encuesta()
 				mensajesError("respuesta_"+r+"_p"+i,"Campo obligatorio");
 				errores++;
 			}
+
+			/*
+
+			multiple respuestas
+
+			if($("#respuesta_"+r+"_p"+i).val()==""){
+				mensajesError("respuesta_"+r+"_p"+i,"Campo obligatorio");
+				errores++;
+			}
+
+			*/
 
 		}
 
@@ -479,6 +492,39 @@ function validar_encuestador()
 		return false;
 
 	}		
+
+	return true;
+
+}
+
+
+// buscar resultados de una encuesat (fechas)
+
+function valida_buscar_resultados_encuesta()
+{
+
+	// vaciar errores
+
+	$(".help-block").empty();
+
+	$(".has-error").removeClass('has-error');
+
+	var errores = 0;
+
+	// fecha_inicio & fecha_fin
+
+	if($("#fecha_inicio").val()=="" || $("#fecha_fin").val()==""){		
+		
+		swal({
+			title: "Oops...",
+			text: "Debes seleccionar un rango de fechas para realizar la busqueda",
+			timer: 3500,
+			type: "error"
+		});
+
+		return false;
+
+	}
 
 	return true;
 

@@ -16,13 +16,16 @@
     <link href="<?php print base_url() ?>assets/css/custom.css" rel="stylesheet">
 
     <!-- font awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php print base_url()."assets/css/font-awesome.min.css" ?>">
 
     <!-- sweet alert -->
     <link rel="stylesheet" href="<?php print base_url()."assets/css/sweetalert.css" ?>">
 
     <!-- datatables -->
     <link rel="stylesheet" type="text/css" href="<?php print base_url()."assets/datatables/datatables.min.css" ?>"/>
+
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="<?php print base_url()."assets/css/bootstrap-datepicker.min.css" ?>">
 
     <!--<link rel="shortcut icon" href="img/favicon.ico">-->
 
@@ -87,6 +90,8 @@
         <script src="<?php print base_url()."assets/datatables/datatables.min.js" ?>"></script>
         <script src="<?php print base_url() ?>assets/js/jquery.timeago.js"></script>
         <script src="<?php print base_url()."assets/js/jquery.timeago.spanish.js" ?>"></script>
+        <script src="<?php print base_url()."assets/js/bootstrap-datepicker.min.js" ?>"></script>
+        <script src="<?php print base_url()."assets/locales/bootstrap-datepicker.es.min.js" ?>"></script>
         
     </body>
 </html>

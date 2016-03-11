@@ -95,6 +95,20 @@ class Encuestas extends CI_Controller{
 	}
 
 
+	// agrega respuesta a una pregunta de un cuestionario
+
+	public function agrega_respuesta($indice = "", $num_pregunta = "")
+	{
+
+		$datos['indice'] = $indice;
+
+		$datos['num_pregunta'] = $num_pregunta;		
+
+		$this->load->view("encuestas/agrega_respuesta_view",$datos);
+
+	}
+
+
 	// mis encuestas 
 
 	public function mis_encuestas($campaigns_k = "")
@@ -119,9 +133,23 @@ class Encuestas extends CI_Controller{
 	{
 
 		if(!$this->Encuestas_model->validar_encuesta($encuestas_k))
-			redirect(base_url(),"refresh");	
+			redirect(base_url(),"refresh");					
 
 		$datos['encuesta'] = $this->Encuestas_model->get_encuesta($encuestas_k);
+
+		// obtener fechas
+
+		$datos['fecha_inicio'] = getOnlyDate($datos['encuesta']->fecha_hora_creacion);
+		$datos['fecha_fin'] = date("Y-m-d");
+
+		if($this->input->post()){
+
+			// asignar fechas 	
+
+			$datos['fecha_inicio'] = $this->input->post('fecha_inicio');
+			$datos['fecha_fin'] = $this->input->post('fecha_fin');
+
+		}
 
 		$datos['preguntas'] = $this->Encuestas_model->get_preguntas_encuesta($encuestas_k);
 
@@ -146,6 +174,48 @@ class Encuestas extends CI_Controller{
 		$datos['contenido_view'] = "encuestas/borrar_view";
 
 		$this->load->view("base_view",$datos);
+
+	}
+
+
+	// test borrar
+
+	public function generar_datos()
+	{
+
+		$begin = new DateTime( '2015-10-01' );
+		$end = new DateTime( '2015-12-31' );
+
+		$interval = DateInterval::createFromDateString('1 day');
+		$period = new DatePeriod($begin, $interval, $end);
+
+		$x = 1;
+
+		foreach ( $period as $dt ):
+			
+			$fecha = $dt->format( "Y-m-d H:i:s\n" );
+
+			print "<p><strong>$x - ".$fecha."</strong></p>";
+
+			for($i = 0; $i < 4; $i++){
+				$query = $this->db->query("insert into encuestas_resultados (encuestas_preguntas_opciones_k,fecha_hora_creacion) values (61,'$fecha')");
+			}
+
+			for($i = 0; $i < 2; $i++){
+				$query = $this->db->query("insert into encuestas_resultados (encuestas_preguntas_opciones_k,fecha_hora_creacion) values (62,'$fecha')");
+			}
+				
+			for($i = 0; $i < 1; $i++){
+				$query = $this->db->query("insert into encuestas_resultados (encuestas_preguntas_opciones_k,fecha_hora_creacion) values (63,'$fecha')");
+			}
+
+			for($i = 0; $i < 3; $i++){
+				$query = $this->db->query("insert into encuestas_resultados (encuestas_preguntas_opciones_k,fecha_hora_creacion) values (64,'$fecha')");
+			}
+
+			$x++;
+
+		endforeach;
 
 	}
 

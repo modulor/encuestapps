@@ -1,4 +1,8 @@
+/* google fonts */
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,300);
+
+/* text responsive */
+@import url('text-align-responsive.css');
 
 
 body{
@@ -103,10 +107,32 @@ ul.list-group>li.list-group-item:nth-of-type(even) {
 
 
 /*** input group ***/
+
 .input-group-addon{
 	background-color: #eee;
 	color: #555;
 }
+
+/*** ***/
+
+
+/*** fecha hora creacion ***/
+
+span.fecha-hora-creacion{
+	color: #555;
+	font-size: 12px;
+	font-style: italic;
+}
+
+/*** ***/
+
+
+/***  datepicker ***/
+
+.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-bottom{
+	background-color: #fff;
+}
+
 /*** ***/
 
 

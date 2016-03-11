@@ -58,7 +58,8 @@
 					<div class="caption">
 						<h3><?php print $encuesta->nombre_encuesta ?></h3>						
 						<p>
-							<i class="fa fa-clock-o"></i> <time title="<?php print $encuesta->fecha_hora_creacion ?>" class="timeago" datetime="<?php print $encuesta->fecha_hora_creacion ?>"></time>
+							<i class="fa fa-clock-o"></i> <time title="<?php print $encuesta->fecha_hora_creacion ?>" class="timeago" datetime="<?php print $encuesta->fecha_hora_creacion ?>"></time><br>
+							<span class="fecha-hora-creacion"><?php print getOnlyDateNormal($encuesta->fecha_hora_creacion) ?></span>
 						</p>
 						<p>
 							<?php 
