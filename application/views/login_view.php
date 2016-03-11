@@ -49,10 +49,16 @@
                         <button class="btn btn-primary btn-lg btn-block" href="#">Entrar</button>
 
                     </form>
-
+                    
+                    <?php 
+                        if(isset($error)):
+                    ?>
                     <div class="alert alert-danger text-center" role="alert">
-                        <?php if(isset($error)) print $error; ?>
-                    </div>                        
+                        <?php print $error;  ?>
+                    </div>
+                    <?php
+                        endif;
+                    ?>
                 </div>
             </div>
         </div>
