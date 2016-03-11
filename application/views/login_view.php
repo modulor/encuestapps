@@ -39,11 +39,18 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="text" class="form-control login-field" value="" placeholder="Correo electr&oacute;nico" id="email-login" name="email" autofocus />
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                <input type="text" class="form-control login-field" value="" placeholder="Correo electr&oacute;nico" id="email-login" name="email" autofocus />
+                            </div>                            
                         </div>
 
                         <div class="form-group">
-                            <input type="password" class="form-control login-field" value="" placeholder="Contrase&ntilde;a" id="login-pass" name="password" />
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                <input type="password" class="form-control login-field" value="" placeholder="Contrase&ntilde;a" id="login-pass" name="password" />
+                            </div>
+                            
                         </div>
                         
                         <button class="btn btn-primary btn-lg btn-block" href="#">Entrar</button>

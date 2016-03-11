@@ -102,6 +102,14 @@ ul.list-group>li.list-group-item:nth-of-type(even) {
 /*** ***/
 
 
+/*** input group ***/
+.input-group-addon{
+	background-color: #eee;
+	color: #555;
+}
+/*** ***/
+
+
 /*** responsive ***/
 
 @media(max-width: 767px){
