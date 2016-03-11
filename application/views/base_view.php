@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8">    
     <title>Encuestas</title>
     <meta name="description" content="Encuestas"/>
-
-    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <!-- loading bootstrap -->
     <link href="<?php print base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -35,6 +34,7 @@
 
     <!-- jquery -->
     <script src="<?php print base_url() ?>assets/js/jquery-1.10.1.min.js"></script>
+
     <script>var base_url = "<?php print base_url() ?>"</script>
 
     </head>

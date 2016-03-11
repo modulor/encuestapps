@@ -5,7 +5,7 @@
     <title>Iniciar sesi&oacute;n &raquo; Encuestas</title>
     <meta name="description" content="Encuestas"/>
 
-    <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <!-- loading bootstrap -->
     <link href="<?php print base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
