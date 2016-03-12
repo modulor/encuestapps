@@ -154,11 +154,6 @@ class Encuestas_model extends CI_Model{
 		return $query = $this->db->get()
 		->num_rows();
 
-		/*return $query = $this->db->select("encuestas_resultados_k")
-		->where("encuestas_preguntas_opciones_k",$encuestas_preguntas_opciones_k)
-		->get('encuestas_resultados')
-		->num_rows();*/
-
 	}
 
 

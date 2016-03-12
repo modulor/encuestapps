@@ -14,19 +14,29 @@
 	<div class="col-sm-6">
 		<div class="panel">
 			<div class="panel-body">
+				<?php 
+
+					$startDate = new DateTime($fecha_inicio." 00:00:00");
+					$endDate = new DateTime($fecha_fin." 00:00:00");
+
+					$interval = $startDate->diff($endDate);
+
+					echo $interval->days;
+
+				?>
 				<form action="<?php print base_url()."encuestas/resultados/".$encuesta->encuestas_k ?>" method="post" onsubmit="return valida_buscar_resultados_encuesta();">
 					<div class="row">
-						<div class="col-xs-9">
+						<div class="col-xs-10">
 							<div class="form-group">
 								<div class="input-daterange input-group" id="datepicker">
 								    <input type="text" class="form-control" name="fecha_inicio" id="fecha_inicio" value="<?php print $fecha_inicio ?>" />
-								    <span class="input-group-addon">a</span>
+								    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 								    <input type="text" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php print $fecha_fin ?>" />
 								</div>
 							</div>						
 						</div>
-						<div class="col-xs-3 text-right">
-							<button type="submit" class="btn btn-primary btn-block">Buscar</button>
+						<div class="col-xs-2 text-right">
+							<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-search"></i></button>
 						</div>
 					</div>
 				</form>
@@ -82,12 +92,12 @@
 				</li>
 				<?php 
 
-					// datos para el js highcharts
+						// datos para el js highcharts pie
 
-					$los_resultados[] = array(
-						"name" => $opcion->opcion, 
-                  		"y"  => $votos
-	                );
+						$los_resultados[] = array(
+							"name" => $opcion->opcion, 
+	                  		"y"  => $votos
+		                );
 
 					endforeach;
 
@@ -153,8 +163,7 @@
 			            x: -20
 			        },
 			        xAxis: {
-			            categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-			                'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
+			            categories: ['Ene', 'Feb', 'Mar']
 			        },
 			        yAxis: {
 			            title: {
@@ -177,16 +186,16 @@
 			        },
 			        series: [{
 			            name: 'A',
-			            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 25.3, 28.9, 29.6]
+			            data: [7.0, 6.9, 9.5]
 			        }, {
 			            name: 'B',
-			            data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 15.6, 16.5]
+			            data: [-0.2, 0.8, 5.7]
 			        }, {
 			            name: 'C',
-			            data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+			            data: [-0.9, 0.6, 3.5]
 			        }, {
 			            name: 'D',
-			            data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+			            data: [3.9, 4.2, 5.7]
 			        }]
 			    });
 			});
