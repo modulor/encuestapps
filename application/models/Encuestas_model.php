@@ -265,6 +265,34 @@ class Encuestas_model extends CI_Model{
 
 	}
 
+
+	public function validar_codigo_email($codigo)
+	{
+
+		$query = $this->db->select("codigo")
+		->where("codigo",$codigo)
+		->get("encuestas_email")
+		->num_rows();
+
+		if($query > 0)
+			return true;
+
+		return false;
+
+	}
+
+
+	// devuelve el encuestas_k de una encuesta a traves de su codigo (tabla: encuestas_email)
+
+	public function get_encuesta_codigo($codigo)
+	{
+
+		return $query = $this->db->where("codigo",$codigo)
+		->get("encuestas_email")
+		->row();
+
+	}
+
 }
 
 ?>
