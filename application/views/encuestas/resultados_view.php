@@ -16,12 +16,46 @@
 			<div class="panel-body">
 				<?php 
 
-					$startDate = new DateTime($fecha_inicio." 00:00:00");
-					$endDate = new DateTime($fecha_fin." 00:00:00");
+					$startDate = new DateTime($fecha_inicio);
+					$endDate = new DateTime($fecha_fin);
 
 					$interval = $startDate->diff($endDate);
 
-					echo $interval->days;
+					echo $interval->days." - days<br>";
+					echo (int)(($interval->days) / 7)." - weeks<br><br>";
+
+					$step  = 1;
+					$unit  = 'W';
+
+					$interval = new DateInterval("P{$step}{$unit}");
+					$period   = new DatePeriod($startDate, $interval, $endDate);
+
+					foreach ($period as $date) {
+					    echo $date->format('Y-m-d'), PHP_EOL;
+					    print "<br>";
+					}
+
+					/*
+
+					$dow   = 'saturday';
+					$step  = 1;
+					$unit  = 'W';
+
+					$start = new DateTime('2012-06-01');
+					$end   = clone $start;
+
+					$start->modify($dow); // Move to first occurence
+					$end->add(new DateInterval('P1Y')); // Move to 1 year from start
+
+					$interval = new DateInterval("P{$step}{$unit}");
+					$period   = new DatePeriod($start, $interval, $end);
+
+					foreach ($period as $date) {
+					    echo $date->format('Y-m-d'), PHP_EOL;
+					    print "<br>";
+					}
+
+					*/
 
 				?>
 				<form action="<?php print base_url()."encuestas/resultados/".$encuesta->encuestas_k ?>" method="post" onsubmit="return valida_buscar_resultados_encuesta();">
