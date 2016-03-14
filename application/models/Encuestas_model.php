@@ -143,16 +143,46 @@ class Encuestas_model extends CI_Model{
 		$this->db->from("encuestas_resultados");
 		$this->db->where("encuestas_preguntas_opciones_k",$encuestas_preguntas_opciones_k);
 
+		$this->db->where("fecha_hora_creacion >=",$fecha_inicio." 00:00:00");
+		$this->db->where("fecha_hora_creacion <=",$fecha_fin." 00:00:00");
 
-		if($fecha_inicio != ""){
+		return $query = $this->db->get()->num_rows();
 
-			$this->db->where("fecha_hora_creacion >=",$fecha_inicio." 00:00:00");
-			$this->db->where("fecha_hora_creacion <=",$fecha_fin." 00:00:00");
+	}
+
+
+	// resultados para la grafica en linea
+
+	public function get_votos_pregunta_linea($encuestas_preguntas_opciones_k, $array_fechas = "")
+	{
+
+		foreach ($array_fechas as $key => $value){
+
+			$fecha = $value;
+
+			$votos[] = $this->get_votos_pregunta($encuestas_preguntas_opciones_k, $fecha, $fecha);
 
 		}
 
-		return $query = $this->db->get()
-		->num_rows();
+		return $votos;
+
+		/*
+
+		$query = $this->db->select("encuestas_preguntas_opciones_k")
+		->limit(11)
+		->order_by("encuestas_resultados_k")
+		->get("encuestas_resultados")
+		->result_array();
+
+		foreach ($query as $row){
+		   $return[] = (int)$row['encuestas_preguntas_opciones_k'];
+		}
+
+		return $return;
+
+		*/
+
+		//return array(10,12,20);
 
 	}
 

@@ -151,6 +151,32 @@ class Encuestas extends CI_Controller{
 
 		}
 
+		// obtener rango de fechas
+
+		$startDate = new DateTime($datos['fecha_inicio']);
+		$endDate = new DateTime($datos['fecha_fin']);
+
+		$interval = $startDate->diff($endDate);
+
+		//echo $interval->days." - days<br>";
+		//echo (int)(($interval->days) / 7)." - weeks<br><br>";
+
+		$step  = 2;
+		$unit  = 'W';
+
+		$interval = new DateInterval("P{$step}{$unit}");
+		$period   = new DatePeriod($startDate, $interval, $endDate);
+
+		$array_fechas = array();
+
+		foreach ($period as $date) {
+		    //echo $date->format('Y-m-d'), PHP_EOL;
+		    //print "<br>";
+		    $array_fechas [] = $date->format('Y-m-d');
+		}
+
+		$datos['array_fechas'] = $array_fechas;
+
 		$datos['preguntas'] = $this->Encuestas_model->get_preguntas_encuesta($encuestas_k);
 
 		$datos['contenido_view'] = "encuestas/resultados_view";

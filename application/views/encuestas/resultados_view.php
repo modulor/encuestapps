@@ -14,50 +14,6 @@
 	<div class="col-sm-6">
 		<div class="panel">
 			<div class="panel-body">
-				<?php 
-
-					$startDate = new DateTime($fecha_inicio);
-					$endDate = new DateTime($fecha_fin);
-
-					$interval = $startDate->diff($endDate);
-
-					echo $interval->days." - days<br>";
-					echo (int)(($interval->days) / 7)." - weeks<br><br>";
-
-					$step  = 1;
-					$unit  = 'W';
-
-					$interval = new DateInterval("P{$step}{$unit}");
-					$period   = new DatePeriod($startDate, $interval, $endDate);
-
-					foreach ($period as $date) {
-					    echo $date->format('Y-m-d'), PHP_EOL;
-					    print "<br>";
-					}
-
-					/*
-
-					$dow   = 'saturday';
-					$step  = 1;
-					$unit  = 'W';
-
-					$start = new DateTime('2012-06-01');
-					$end   = clone $start;
-
-					$start->modify($dow); // Move to first occurence
-					$end->add(new DateInterval('P1Y')); // Move to 1 year from start
-
-					$interval = new DateInterval("P{$step}{$unit}");
-					$period   = new DatePeriod($start, $interval, $end);
-
-					foreach ($period as $date) {
-					    echo $date->format('Y-m-d'), PHP_EOL;
-					    print "<br>";
-					}
-
-					*/
-
-				?>
 				<form action="<?php print base_url()."encuestas/resultados/".$encuesta->encuestas_k ?>" method="post" onsubmit="return valida_buscar_resultados_encuesta();">
 					<div class="row">
 						<div class="col-xs-10">
@@ -111,7 +67,7 @@
 				<!-- respuestas -->
 				<?php
 
-					$los_resultados = array();
+					$los_resultados_pie = array();
 
 					$opciones = $this->Encuestas_model->get_preguntas_opciones($pregunta->encuestas_preguntas_k);
 
@@ -128,7 +84,7 @@
 
 						// datos para el js highcharts pie
 
-						$los_resultados[] = array(
+						$los_resultados_pie[] = array(
 							"name" => $opcion->opcion, 
 	                  		"y"  => $votos
 		                );
@@ -142,10 +98,10 @@
 		<!-- preguntas fin -->
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-6">
+		
+		<!-- grafica pie -->
 		<div id="grafica_pie_<?php print $pregunta->encuestas_preguntas_k ?>"></div>
-
-		<?php $data = json_encode($los_resultados) ?>
-
+		<?php $data = json_encode($los_resultados_pie) ?>
 		<script type="text/javascript">
 			$(function () {
 			    $(document).ready(function () {
@@ -182,8 +138,32 @@
 			    });
 			});
 		</script>
+		<!-- grafica pie fin -->
+
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-6">
+
+		<!-- grafica linea -->
+		<?php
+
+			$los_resultados_linea = array();
+
+			foreach($opciones as $opcion):
+
+				$los_votos_linea = $this->Encuestas_model->get_votos_pregunta_linea($opcion->encuestas_preguntas_opciones_k, $array_fechas);
+
+				$los_resultados_linea[] = array(
+					"name" => $opcion->opcion, 
+              		"data"  => $los_votos_linea
+                );
+
+			endforeach;
+
+			$data_pie = json_encode($los_resultados_linea);
+
+			//print $data_pie." - ";
+
+		?>
 		<div id="grafica_linea_<?php print $pregunta->encuestas_preguntas_k ?>"></div>
 		<script type="text/javascript">
 			$(function () {
@@ -197,7 +177,7 @@
 			            x: -20
 			        },
 			        xAxis: {
-			            categories: ['Ene', 'Feb', 'Mar']
+			            categories: <?php print json_encode($array_fechas) ?>
 			        },
 			        yAxis: {
 			            title: {
@@ -218,22 +198,12 @@
 			            verticalAlign: 'middle',
 			            borderWidth: 0
 			        },
-			        series: [{
-			            name: 'A',
-			            data: [7.0, 6.9, 9.5]
-			        }, {
-			            name: 'B',
-			            data: [-0.2, 0.8, 5.7]
-			        }, {
-			            name: 'C',
-			            data: [-0.9, 0.6, 3.5]
-			        }, {
-			            name: 'D',
-			            data: [3.9, 4.2, 5.7]
-			        }]
+			        series: <?php print $data_pie ?>
 			    });
 			});
 		</script>
+		<!-- grafica linea fin -->
+
 	</div>
 </div>
 
