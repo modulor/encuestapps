@@ -7,47 +7,56 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-2">		
-		<p><a href="<?php print base_url()."encuestas/mis_encuestas/".$encuesta->campaigns_k ?>" class="btn btn-primary btn-block btn-lg"><i class="fa fa-check-square-o"></i> Lista de encuestas</a></p>
+	<div class="col-xs-6 text-right">
+		<a href="<?php print base_url()."encuestas/mis_encuestas/".$encuesta->campaigns_k ?>" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Lista de encuestas</a>
 	</div>
-	<div class="col-sm-8">
+	<div class="col-xs-6 text-left">
+		<a href="<?php print base_url()."encuestas/crear/".$encuesta->campaigns_k ?>" class="btn btn-info"><i class="fa fa-plus"></i> Crear encuesta</a>
+	</div>	
+</div>
+
+<div class="row">
+	<div class="col-md-12">
 		<div class="panel">
 			<div class="panel-body">
+				<div class="row">					
+					<div class="col-sm-12">		
+						<form action="<?php print base_url()."encuestas/resultados/".$encuesta->encuestas_k ?>" method="post" onsubmit="return valida_buscar_resultados_encuesta();">
+							<div class="row">
+								<div class="col-xs-8">
+									<div class="form-group">
+										<div class="input-daterange input-group" id="datepicker">
+										    <input type="text" class="form-control" name="fecha_inicio" id="fecha_inicio" value="<?php print $fecha_inicio ?>" />
+										    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+										    <input type="text" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php print $fecha_fin ?>" />
+										</div>
+										<script>
+											$(function(){
 
-				<form action="<?php print base_url()."encuestas/resultados/".$encuesta->encuestas_k ?>" method="post" onsubmit="return valida_buscar_resultados_encuesta();">
-					<div class="row">
-						<div class="col-xs-10">
-							<div class="form-group">
-								<div class="input-daterange input-group" id="datepicker">
-								    <input type="text" class="form-control" name="fecha_inicio" id="fecha_inicio" value="<?php print $fecha_inicio ?>" />
-								    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-								    <input type="text" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php print $fecha_fin ?>" />
+												$('.input-daterange').datepicker({
+												    startDate: "2015-10-01",
+												    endDate: "2016-04-01",
+												    multidate: false,
+												    language: 'es',
+												    format: "yyyy-mm-dd",
+												});
+
+											})
+										</script>
+									</div>						
 								</div>
-							</div>						
-						</div>
-						<div class="col-xs-2 text-right">
-							<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-search"></i></button>
-						</div>
-					</div>
-				</form>
+								<div class="col-xs-2 text-right">
+									<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-search"></i></button>
+								</div>
+								<div class="col-xs-2 text-right">
+									<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#enviarEncuestaModal"><i class="fa fa-envelope"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>					
+				</div>
 			</div>
 		</div>
-	</div>
-	<script>
-		$(function(){
-
-			$('.input-daterange').datepicker({
-			    startDate: "2015-10-01",
-			    endDate: "2016-04-01",
-			    multidate: false,
-			    language: 'es',
-			    format: "yyyy-mm-dd",
-			});
-
-		})
-	</script>
-	<div class="col-sm-2 text-right text-right-not-xs">
-		<p><a href="<?php print base_url()."encuestas/crear/".$encuesta->campaigns_k ?>" class="btn btn-info btn-block btn-lg"><i class="fa fa-plus"></i> Crear encuesta</a></p>
 	</div>
 </div>
 
@@ -221,3 +230,144 @@
 <?php 
 	endforeach;
 ?>
+
+
+<!-- enviar encuesta modal -->
+<div class="modal fade" id="enviarEncuestaModal" tabindex="1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+				<h4 class="modal-title"><i class="fa fa-envelope"></i> Enviar encuesta</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">						
+					<label class="control-label">* Email</label>
+					<input type="text" name="email" id="email" class="form-control">
+					<span class="help-block" id="email_help"></span>
+				</div>
+
+				<p class="text-muted" id="mensaje_email"></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" name="enviar_email" class="btn btn-primary">Enviar</button>
+				<button type="button" name="cancelar_email" class="btn btn-default hide" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- enviar encuesta modal fin -->
+
+<script type="text/javascript">
+
+	// modal email
+
+	$('#enviarEncuestaModal').on('shown.bs.modal', function () {
+  		
+  		$('#email').focus();
+
+  		// mensaje email
+
+		var mensaje_email = "<p>Se enviar&aacute;n los resultados obtenidos del <strong>"+$("#fecha_inicio").val()+"</strong> al <strong>"+$("#fecha_fin").val()+"</strong></p>";
+
+		$("#mensaje_email").html(mensaje_email);
+
+	});	
+	
+	// validar envio de email
+
+	$("button[name=enviar_email]").click(function(){		
+
+		enviarEmailEncuesta();
+
+	});
+
+
+	$('#email').keypress(function (e) {
+		var key = e.which;
+		if(key == 13){
+			enviarEmailEncuesta();
+			return false;  
+		}
+	});
+
+
+	function enviarEmailEncuesta()
+	{
+
+		// vaciar errores
+
+		$(".help-block").empty();
+
+		$(".has-error").removeClass('has-error');
+
+		errores = 0;
+
+		if($("#email").val()==""){		
+			mensajesError("email","Campo obligatorio");
+			errores++;
+		}
+
+		if(!validarEmail($("#email").val())){		
+			mensajesError("email","El email <strong>'"+$("#email").val()+"'</strong> no es v&aacute;lido");
+			errores++;
+		}
+
+		if(errores == 0){
+
+			var email = $("#email").val();
+
+			var fecha_inicio = $("#fecha_inicio").val();
+
+			var fecha_fin = $("#fecha_fin").val();
+
+			var encuestas_k = "<?php print $encuesta->encuestas_k ?>";
+
+			$.ajax({
+		        url: base_url+"encuestas/enviar/", 
+		        type: "POST", 
+		        dataType: 'json',
+		        data: {
+		            encuestas_k: encuestas_k,
+		            fecha_inicio: fecha_inicio,
+		            fecha_fin: fecha_fin,
+		            email: email
+		        },   
+		        beforeSend: function(){
+
+		        	$("div.modal-body").html("<div class='text-center'><i class='fa fa-spinner fa-spin fa-3x'></i></div>");
+
+		        	$("button[name=enviar_email]").prop("disabled",true);
+		        	
+		        },                 
+		        success: function(respond){ 
+		        	
+		        	$("div.modal-body").html('<div class="text-center">La encuesta ha sido enviada a <strong>'+respond.email+'</strong></div>');
+
+		        	$("button[name=enviar_email]").addClass("hide");
+
+		        	$("button[name=cancelar_email]").removeClass("hide");
+
+		        	console.log("fecha inicio: "+respond.fecha_inicio);
+		        	console.log("fecha fin: "+respond.fecha_fin);
+
+		        },
+		        error: function (data){		            
+
+		        	swal({
+						title: "Oops...",
+						text: "Ocurrio un error inesperado...",
+						timer: 3500,
+						type: "error"
+					});
+
+					$("button[name=enviar_email]").prop("disabled",false);
+
+		        }
+		    });
+
+		}
+
+	}
+
+</script>

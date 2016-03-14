@@ -247,6 +247,24 @@ class Encuestas_model extends CI_Model{
 
 	}
 
+
+	public function guadar_encuesta_email($datos)
+	{
+
+		$data = array(
+			'codigo' => $datos['codigo'],
+			'email' => $datos['email'],
+			'fecha_inicio' => $datos['fecha_inicio'],
+			'fecha_fin' => $datos['fecha_fin'],
+			'encuestas_k' => $datos['encuestas_k']
+		);
+
+		$insert = $this->db->insert("encuestas_email",$data);
+
+		return true;
+
+	}
+
 }
 
 ?>
