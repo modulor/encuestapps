@@ -144,7 +144,7 @@ class Encuestas_model extends CI_Model{
 		$this->db->where("encuestas_preguntas_opciones_k",$encuestas_preguntas_opciones_k);
 
 		$this->db->where("fecha_hora_creacion >=",$fecha_inicio." 00:00:00");
-		$this->db->where("fecha_hora_creacion <=",$fecha_fin." 00:00:00");
+		$this->db->where("fecha_hora_creacion <=",$fecha_fin." 23:59:59");
 
 		return $query = $this->db->get()->num_rows();
 
@@ -155,6 +155,8 @@ class Encuestas_model extends CI_Model{
 
 	public function get_votos_pregunta_linea($encuestas_preguntas_opciones_k, $array_fechas = "")
 	{
+
+		$votos = array();
 
 		foreach ($array_fechas as $key => $value){
 
