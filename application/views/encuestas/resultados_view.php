@@ -7,13 +7,13 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-3">
-		<p>&nbsp;</p>
-		<p><a href="<?php print base_url()."encuestas/mis_encuestas/".$encuesta->campaigns_k ?>" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Lista de encuestas</a></p>
+	<div class="col-sm-2">		
+		<p><a href="<?php print base_url()."encuestas/mis_encuestas/".$encuesta->campaigns_k ?>" class="btn btn-primary btn-block btn-lg"><i class="fa fa-check-square-o"></i> Lista de encuestas</a></p>
 	</div>
-	<div class="col-sm-6">
+	<div class="col-sm-8">
 		<div class="panel">
 			<div class="panel-body">
+
 				<form action="<?php print base_url()."encuestas/resultados/".$encuesta->encuestas_k ?>" method="post" onsubmit="return valida_buscar_resultados_encuesta();">
 					<div class="row">
 						<div class="col-xs-10">
@@ -38,7 +38,7 @@
 
 			$('.input-daterange').datepicker({
 			    startDate: "2015-10-01",
-			    endDate: "2016-03-11",
+			    endDate: "2016-04-01",
 			    multidate: false,
 			    language: 'es',
 			    format: "yyyy-mm-dd",
@@ -46,9 +46,8 @@
 
 		})
 	</script>
-	<div class="col-sm-3 text-right text-right-not-xs">
-		<p>&nbsp;</p>
-		<p><a href="<?php print base_url()."encuestas/crear/".$encuesta->campaigns_k ?>" class="btn btn-info"><i class="fa fa-plus"></i> Crear encuesta</a></p>
+	<div class="col-sm-2 text-right text-right-not-xs">
+		<p><a href="<?php print base_url()."encuestas/crear/".$encuesta->campaigns_k ?>" class="btn btn-info btn-block btn-lg"><i class="fa fa-plus"></i> Crear encuesta</a></p>
 	</div>
 </div>
 
@@ -57,7 +56,7 @@
 ?>
 
 <div class="row">
-	<div class="col-lg-4 col-md-4 col-sm-12">		
+	<div class="<?php print $class_col_preguntas ?>">		
 		<!-- preguntas -->		
 		<div class="panel panel-info">
 			<div class="panel-heading">
@@ -97,7 +96,7 @@
 		</div>
 		<!-- preguntas fin -->
 	</div>
-	<div class="col-lg-4 col-md-4 col-sm-6">
+	<div class="<?php print $class_col_pie ?>">
 		
 		<!-- grafica pie -->
 		<div id="grafica_pie_<?php print $pregunta->encuestas_preguntas_k ?>"></div>
@@ -141,7 +140,13 @@
 		<!-- grafica pie fin -->
 
 	</div>
-	<div class="col-lg-4 col-md-4 col-sm-6">
+
+	<?php 
+
+		if($grafica_linea_mostrar):
+
+	?>
+	<div class="<?php print $class_col_linea ?>">
 
 		<!-- grafica linea -->
 		<?php
@@ -177,7 +182,7 @@
 			            x: -20
 			        },
 			        xAxis: {
-			            categories: <?php print json_encode($array_fechas) ?>
+			            categories: <?php print json_encode($array_fechas_texto) ?>
 			        },
 			        yAxis: {
 			            title: {
@@ -205,6 +210,11 @@
 		<!-- grafica linea fin -->
 
 	</div>
+	<?php 
+
+		endif;
+
+	?>
 </div>
 
 <hr>

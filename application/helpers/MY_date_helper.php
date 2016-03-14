@@ -102,7 +102,7 @@ function getMesCorto($date,$numeric=false){
 // de una fecha YYYY-MM-DD la transforma a DD de MM de YYYYY
 function getFechaNormal($fecha,$tipo=""){
 
-    $dia = getDay($fecha);
+    $dia = getDay($fecha,true);
 
     if($tipo=="corto")
         $mes = getMesCorto($fecha);

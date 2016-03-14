@@ -161,21 +161,81 @@ class Encuestas extends CI_Controller{
 		//echo $interval->days." - days<br>";
 		//echo (int)(($interval->days) / 7)." - weeks<br><br>";
 
-		$step  = 2;
-		$unit  = 'W';
+		$datos['weeks'] = (int)(($interval->days) / 7);
 
-		$interval = new DateInterval("P{$step}{$unit}");
-		$period   = new DatePeriod($startDate, $interval, $endDate);
+		$datos['grafica_linea_mostrar'] = false;
 
-		$array_fechas = array();
+		// mostrar grafica linea si hay mas de 4 semanas de informacion 
 
-		foreach ($period as $date) {
-		    //echo $date->format('Y-m-d'), PHP_EOL;
-		    //print "<br>";
-		    $array_fechas [] = $date->format('Y-m-d');
+		if($datos['weeks']>=4){
+
+			$datos['grafica_linea_mostrar'] = true;
+
+			$step  = 2;
+
+			switch ($datos['weeks']) {
+
+				case  ($datos['weeks'] >= 23):
+
+					$step = 4;
+				    
+			  	break;
+
+			  	case  ($datos['weeks'] >= 51):
+
+					$step = 8;
+				    
+			  	break;
+			}
+
 		}
 
-		$datos['array_fechas'] = $array_fechas;
+		// si existen datos suficientes para mostrar la grafica en linea
+
+		if($datos['grafica_linea_mostrar']){
+
+			$unit  = 'W';
+
+			$interval = new DateInterval("P{$step}{$unit}");
+			$period   = new DatePeriod($startDate, $interval, $endDate);
+
+			// array_fechas: eje en x de la grafica en linea (DD-MM-YY)
+
+			$array_fechas = array();
+			$array_fechas_texto = array();
+
+			foreach ($period as $date) {
+			    //echo $date->format('Y-m-d'), PHP_EOL;
+			    //print "<br>";
+			    $array_fechas [] = $date->format('Y-m-d');
+			    $array_fechas_texto [] = getFechaNormal($date->format('Y-m-d'),"corto");
+			}
+
+			//$array_fechas = ['uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce'];
+
+			$datos['array_fechas'] = $array_fechas;
+
+			$datos['array_fechas_texto'] = $array_fechas_texto;
+
+			// clases col para los divs
+
+			$datos['class_col_preguntas'] = "col-lg-3 col-md-3 col-sm-12";
+
+			$datos['class_col_pie'] = "col-lg-4 col-md-4 col-sm-6";
+
+			$datos['class_col_linea'] = "col-lg-5 col-md-5 col-sm-6";
+
+		}
+		else{
+
+			// clases col para los divs
+
+			$datos['class_col_preguntas'] = "col-lg-4 col-offset-2 col-md-4 col-md-offset-2 col-sm-6";
+
+			$datos['class_col_pie'] = "col-lg-4 col-md-4 col-sm-6";
+
+		}
+		
 
 		$datos['preguntas'] = $this->Encuestas_model->get_preguntas_encuesta($encuestas_k);
 
@@ -209,8 +269,8 @@ class Encuestas extends CI_Controller{
 	public function generar_datos()
 	{
 
-		$begin = new DateTime( '2015-10-01' );
-		$end = new DateTime( '2015-12-31' );
+		$begin = new DateTime( '2016-03-02' );
+		$end = new DateTime( '2016-03-04' );
 
 		$interval = DateInterval::createFromDateString('1 day');
 		$period = new DatePeriod($begin, $interval, $end);
@@ -223,21 +283,33 @@ class Encuestas extends CI_Controller{
 
 			print "<p><strong>$x - ".$fecha."</strong></p>";
 
-			for($i = 0; $i < 4; $i++){
+			$limite = rand(1, 9);
+
+			for($i = 0; $i < $limite; $i++){
 				$query = $this->db->query("insert into encuestas_resultados (encuestas_preguntas_opciones_k,fecha_hora_creacion) values (61,'$fecha')");
 			}
 
-			for($i = 0; $i < 2; $i++){
+			/*
+
+			$limite = rand(2, 4);
+
+			for($i = 0; $i < $limite; $i++){
 				$query = $this->db->query("insert into encuestas_resultados (encuestas_preguntas_opciones_k,fecha_hora_creacion) values (62,'$fecha')");
 			}
 				
-			for($i = 0; $i < 1; $i++){
+			$limite = rand(1, 4);
+
+			for($i = 0; $i < $limite; $i++){
 				$query = $this->db->query("insert into encuestas_resultados (encuestas_preguntas_opciones_k,fecha_hora_creacion) values (63,'$fecha')");
 			}
 
-			for($i = 0; $i < 3; $i++){
+			$limite = rand(4, 5);
+
+			for($i = 0; $i < $limite; $i++){
 				$query = $this->db->query("insert into encuestas_resultados (encuestas_preguntas_opciones_k,fecha_hora_creacion) values (64,'$fecha')");
 			}
+
+			*/
 
 			$x++;
 
