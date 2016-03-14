@@ -7,11 +7,14 @@
 </div>
 
 <div class="row">
-	<div class="col-xs-6 text-right">
+	<div class="col-xs-4 text-center">
 		<a href="<?php print base_url()."encuestas/mis_encuestas/".$encuesta->campaigns_k ?>" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Lista de encuestas</a>
 	</div>
-	<div class="col-xs-6 text-left">
-		<a href="<?php print base_url()."encuestas/crear/".$encuesta->campaigns_k ?>" class="btn btn-info"><i class="fa fa-plus"></i> Crear encuesta</a>
+	<div class="col-xs-4 text-center">
+		<a href="<?php print base_url()."encuestas/crear/".$encuesta->campaigns_k ?>" class="btn btn-default"><i class="fa fa-plus"></i> Crear encuesta</a>
+	</div>
+	<div class="col-xs-4 text-center">
+		<a href="<?php print base_url()."encuestas/aplicar/".$encuesta->encuestas_k ?>" class="btn btn-info"><i class="fa fa-check-square-o"></i> Aplicar</a>
 	</div>	
 </div>
 
@@ -347,9 +350,6 @@
 		        	$("button[name=enviar_email]").addClass("hide");
 
 		        	$("button[name=cancelar_email]").removeClass("hide");
-
-		        	console.log("fecha inicio: "+respond.fecha_inicio);
-		        	console.log("fecha fin: "+respond.fecha_fin);
 
 		        },
 		        error: function (data){		            

@@ -329,9 +329,23 @@ function validar_aplicar_encuesta()
 
 	// quitar errores
 
-	$(".list-group").removeClass("has-error");
+	$(".has-error").removeClass("has-error");
 
-	$("p.text-center.help-block.text-danger").addClass("hidden");
+	$(".help-block").empty();
+
+	// validar ubicacion
+
+	if($("#cat_entidades_k").val()==""){		
+		mensajesError("cat_entidades_k","Campo obligatorio");
+		return false;
+	}
+
+	if($("#cat_municipios_k").val()==""){		
+		mensajesError("cat_municipios_k","Campo obligatorio");
+		return false;
+	}
+
+	// validar preguntas
 
 	var preguntas = $("#num_preguntas").val();
 
@@ -366,7 +380,35 @@ function validar_aplicar_encuesta()
 
 		return false;
 
-    }		
+    }	
+
+    // validar datos encuestado
+
+    if($("#celular").val()==""){		
+		mensajesError("celular","Campo obligatorio");
+		return false;
+	}	
+
+	if($("#seccion").val()==""){		
+		mensajesError("seccion","Campo obligatorio");
+		return false;
+	}
+
+	if (!$("#sexo_hombre").prop("checked") && !$("#sexo_mujer").is(":checked") ) {
+		$("#sexo_help").append( "<i class='fa fa-warning'></i> "+"Campo obligatorio" );
+		$( "#form_group_sexo" ).addClass( "has-error" );
+
+		$('html, body').animate({
+	        scrollTop: $("#form_group_sexo").offset().top
+	    }, 150);
+
+		return false;
+	}
+
+	if($("#rango_edad").val()==""){		
+		mensajesError("rango_edad","Campo obligatorio");
+		return false;
+	}
 
 	return true;
 

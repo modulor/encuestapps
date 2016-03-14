@@ -119,13 +119,32 @@ class Encuestas_model extends CI_Model{
 	public function guardar_resultados($datos)
 	{
 
+		// guardar info del encuestado
+
+		$data_encuestado = array(
+			'celular' => $datos['celular'],
+			'seccion' => $datos['seccion'],
+			'rango_edad' => $datos['rango_edad'],
+			'sexo' => $datos['sexo']
+		);
+
+		$guardar_encuestado = $this->db->insert("datos_encuestados",$data_encuestado);
+
+		$datos_encuestados_k = $this->db->insert_id();
+
 		$preguntas = $this->get_preguntas_encuesta($datos['encuestas_k']);
 
 		foreach($preguntas as $pregunta):
 
 			// guardar en encuestas_resultados
 
-			$data['encuestas_preguntas_opciones_k'] = $datos['encuestas_preguntas_k_'.$pregunta->encuestas_preguntas_k];
+			$data = array(
+				'encuestas_preguntas_opciones_k' => $datos['encuestas_preguntas_k_'.$pregunta->encuestas_preguntas_k],
+				'cat_municipios_k' => $datos['cat_municipios_k'],
+				'datos_encuestados_k' => $datos_encuestados_k
+			);
+
+			// $data['encuestas_preguntas_opciones_k'] = $datos['encuestas_preguntas_k_'.$pregunta->encuestas_preguntas_k];
 
 			$insert = $this->db->insert("encuestas_resultados",$data);
 

@@ -35,9 +35,17 @@ class Encuestas extends CI_Controller{
 		if(!$this->Encuestas_model->validar_encuesta($encuestas_k))
 			redirect(base_url(),"refresh");
 
+		// guardamos resultados
+
 		if($this->input->post())
 			
-			$datos['ok'] = $this->Encuestas_model->guardar_resultados($this->input->post());		
+			$datos['ok'] = $this->Encuestas_model->guardar_resultados($this->input->post());
+
+		// catalogo de entidades
+
+		$this->load->model("Ubicaciones_model");
+
+		$datos['entidades'] = $this->Ubicaciones_model->lista_entidades();
 
 		$datos['encuesta'] = $this->Encuestas_model->get_encuesta($encuestas_k);
 
