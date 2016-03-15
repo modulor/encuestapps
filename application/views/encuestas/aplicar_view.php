@@ -51,7 +51,7 @@
 <div class="row">
 	<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
 
-		<form action="<?php print base_url()."encuestas/aplicar/".$encuesta->encuestas_k ?>" method="post" onsubmit="return validar_aplicar_encuesta();">
+		<form name="aplicar_encuesta" action="<?php print base_url()."encuestas/aplicar/".$encuesta->encuestas_k ?>" method="post" onsubmit="return validar_aplicar_encuesta();">
 
 			<!-- ubicacion -->
 			<div class="panel panel-info" id="encuesta_ubicacion">
@@ -77,43 +77,6 @@
 					</div>
 
 					<div id="lista_municipios"></div>
-
-					<script>
-						$("#cat_entidades_k").change(function(){
-
-							// cargar los municipios de cat_entidades_k
-
-							$.ajax({
-						        url: base_url+"ubicaciones/municipios/", 
-						        type: "POST", 
-						        dataType: 'html',
-						        data: {
-						            cat_entidades_k: $("#cat_entidades_k").val()
-						        },   
-						        beforeSend: function(){
-
-						        	$("#lista_municipios").html('<div class="text-center"><i class="fa fa-spinner fa-spin fa-3x"></i></div>');
-						        	
-						        },                 
-						        success: function(respond){ 					        	
-						        	
-						        	$("#lista_municipios").html(respond);
-
-						        },
-						        error: function (data){		            
-
-						        	swal({
-										title: "Oops...",
-										text: "Ocurrio un error inesperado...",
-										timer: 3500,
-										type: "error"
-									});
-
-						        }
-						    });
-
-						});
-					</script>
 				</div>
 			</div>
 			<!-- ubicacion fin -->
@@ -191,10 +154,10 @@
 					
 					<div class="form-group" id="form_group_sexo">
 						<label class="radio-inline">
-					  		<input type="radio" name="sexo" id="sexo_hombre" value="HOMBRE"> Hombre
+					  		<input type="radio" name="sexo" id="sexo_hombre" value="HOMBRE"> <strong>Hombre</strong>
 						</label>
 						<label class="radio-inline">
-						  	<input type="radio" name="sexo" id="sexo_mujer" value="MUJER"> Mujer
+						  	<input type="radio" name="sexo" id="sexo_mujer" value="MUJER"> <strong>Mujer</strong>
 						</label>
 						<span id="sexo_help" class="help-block"></span>
 					</div>

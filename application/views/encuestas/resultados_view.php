@@ -6,62 +6,158 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-xs-4 text-center">
-		<a href="<?php print base_url()."encuestas/mis_encuestas/".$encuesta->campaigns_k ?>" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Lista de encuestas</a>
-	</div>
-	<div class="col-xs-4 text-center">
-		<a href="<?php print base_url()."encuestas/crear/".$encuesta->campaigns_k ?>" class="btn btn-default"><i class="fa fa-plus"></i> Crear encuesta</a>
-	</div>
-	<div class="col-xs-4 text-center">
-		<a href="<?php print base_url()."encuestas/aplicar/".$encuesta->encuestas_k ?>" class="btn btn-info"><i class="fa fa-check-square-o"></i> Aplicar</a>
-	</div>	
-</div>
-
-<div class="row">
-	<div class="col-md-12">
-		<div class="panel">
-			<div class="panel-body">
-				<div class="row">					
-					<div class="col-sm-12">		
-						<form action="<?php print base_url()."encuestas/resultados/".$encuesta->encuestas_k ?>" method="post" onsubmit="return valida_buscar_resultados_encuesta();">
-							<div class="row">
-								<div class="col-xs-8">
-									<div class="form-group">
-										<div class="input-daterange input-group" id="datepicker">
-										    <input type="text" class="form-control" name="fecha_inicio" id="fecha_inicio" value="<?php print $fecha_inicio ?>" />
-										    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-										    <input type="text" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php print $fecha_fin ?>" />
-										</div>
-										<script>
-											$(function(){
-
-												$('.input-daterange').datepicker({
-												    startDate: "2015-10-01",
-												    endDate: "2016-04-01",
-												    multidate: false,
-												    language: 'es',
-												    format: "yyyy-mm-dd",
-												});
-
-											})
-										</script>
-									</div>						
-								</div>
-								<div class="col-xs-2 text-right">
-									<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-search"></i></button>
-								</div>
-								<div class="col-xs-2 text-right">
-									<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#enviarEncuestaModal"><i class="fa fa-envelope"></i></button>
-								</div>
-							</div>
-						</form>
-					</div>					
+<div class="row hidden-xs">
+	<div class="col-lg-12">
+		<div class="well">
+			<div class="row">
+				<div class="col-sm-4 text-center">
+					<a href="<?php print base_url()."encuestas/mis_encuestas/".$encuesta->campaigns_k ?>" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Lista de encuestas</a>
+				</div>
+				<div class="col-sm-4 text-center">
+					<a href="<?php print base_url()."encuestas/crear/".$encuesta->campaigns_k ?>" class="btn btn-default"><i class="fa fa-plus"></i> Crear encuesta</a>
+				</div>
+				<div class="col-sm-4 text-center">
+					<a href="<?php print base_url()."encuestas/aplicar/".$encuesta->encuestas_k ?>" class="btn btn-info btn-xs-block"><i class="fa fa-check-square-o"></i> Aplicar</a>
 				</div>
 			</div>
 		</div>
+	</div>	
+</div>
+
+<div class="row visible-xs">
+	<div class="col-sm-8 text-center">
+		<p>
+			<div class="btn-group">
+				<a <?php print base_url()."encuestas/mis_encuestas/".$encuesta->campaigns_k ?> class="btn btn-lg btn-primary"><i class="fa fa-check-square-o"></i> Lista de encuestas</a>
+
+				<button class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+
+				<ul class="dropdown-menu">
+					<li>
+						<a href="<?php print base_url()."encuestas/crear/".$encuesta->campaigns_k ?>"><i class="fa fa-plus"></i> Crear encuesta</a>
+					</li>
+					<li>
+						<a href="<?php print base_url()."encuestas/aplicar/".$encuesta->encuestas_k ?>"><i class="fa fa-check-square-o"></i> Aplicar</a>
+					</li>				
+				</ul>
+			</div>
+		</p>
 	</div>
 </div>
+
+<form action="<?php print base_url()."encuestas/resultados/".$encuesta->encuestas_k ?>" method="post" onsubmit="return valida_buscar_resultados_encuesta();">
+	<div class="row">
+		<div class="col-md-12">		
+			<div class="well">
+				<div class="row">					
+					<div class="col-sm-8">
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">								
+								<div class="input-daterange input-group margin-bottom-20" id="datepicker">
+								    <input type="text" class="form-control" name="fecha_inicio" id="fecha_inicio" value="<?php print $fecha_inicio ?>" />
+								    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								    <input type="text" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php print $fecha_fin ?>" />
+								</div>
+								<a href="#" name="mas_filtros">M&aacute;s opciones <i class="fa fa-angle-down"></i></a>
+								<script>
+									$(function(){
+
+										// rango de fechas
+
+										$('.input-daterange').datepicker({
+										    startDate: "2015-10-01",
+										    endDate: "2016-04-01",
+										    multidate: false,
+										    language: 'es',
+										    format: "yyyy-mm-dd",
+										});
+
+										// mas opciones
+
+										$("a[name=mas_filtros]").click(function(e){
+
+											e.preventDefault();
+
+											$("#buscar_mas_filtros").toggleClass("hidden");
+
+											$("a[name=mas_filtros]").toggleClass("hidden");
+
+										});
+
+									})
+								</script>								
+							</div>
+							<div class="col-sm-12 col-xs-12 hidden" id="buscar_mas_filtros">
+
+								<!-- ubicacion -->
+
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">											
+											<select name="cat_entidades_k" id="cat_entidades_k" class="form-control">
+												<option value="todos">Todos los estados</option>
+												<?php 
+													foreach($entidades as $entidad):
+												?>
+												<option value="<?php print $entidad->cat_entidades_k ?>"><?php print $entidad->nom_ent ?></option>
+												<?php
+													endforeach;
+												?>
+											</select>
+											<span class="help-block" id="cat_entidades_k_help"></span>
+										</div>
+									</div>
+									<div class="col-sm-6" id="lista_municipios"></div>
+								</div>
+
+								<!-- ubicacion fin -->
+
+
+								<div class="row">
+									<div class="col-sm-6">
+										<!-- edad -->
+										<div class="form-group">											
+											<select name="rango_edad" id="rango_edad" class="form-control">
+												<option value="todos">Todas las edades</option>
+												<option value="18-25">18 a 25 a&ntilde;os</option>
+												<option value="26-35">26 a 35 a&ntilde;os</option>
+												<option value="36-45">36 a 45 a&ntilde;os</option>
+												<option value="46">+46</option>
+											</select>
+										</div>
+										<!-- edad fin -->
+									</div>
+									<div class="col-sm-6">
+										<!-- sexo -->
+										<div class="form-group" id="form_group_sexo">
+											<label class="radio-inline">
+										  		<input type="radio" name="sexo" id="sexo_hombre" value="HOMBRE"> <strong>Hombre</strong>
+											</label>
+											<label class="radio-inline">
+											  	<input type="radio" name="sexo" id="sexo_mujer" value="MUJER"> <strong>Mujer</strong>
+											</label>
+											<span id="sexo_help" class="help-block"></span>
+										</div>
+										<!-- sexo fin -->						
+									</div>
+								</div>								
+							</div>							
+							<div class="col-sm-12">
+								<a href="#" name="mas_filtros" class="hidden">Menos opciones <i class="fa fa-angle-up"></i></a>
+							</div>
+						</div>						
+					</div>	
+					<div class="col-sm-2 col-xs-6 text-right">
+						<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-search"></i></button>
+					</div>
+					<div class="col-sm-2 col-xs-6 text-right">
+						<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#enviarEncuestaModal"><i class="fa fa-envelope"></i></button>
+					</div>				
+				</div>
+			</div>		
+		</div>
+	</div>
+</form>
 
 <?php
 	foreach($preguntas as $pregunta):

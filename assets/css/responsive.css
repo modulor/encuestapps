@@ -1,0 +1,9 @@
+/*** responsive ***/
+
+@media(max-width: 767px){
+	.page-header{
+		font-size: 32px;
+	}
+}
+
+/*** ***/

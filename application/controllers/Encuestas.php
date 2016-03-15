@@ -242,10 +242,15 @@ class Encuestas extends CI_Controller{
 
 			$datos['class_col_pie'] = "col-lg-4 col-md-4 col-sm-6";
 
-		}
-		
+		}		
 
 		$datos['preguntas'] = $this->Encuestas_model->get_preguntas_encuesta($encuestas_k);
+
+		// catalogo de entidades
+
+		$this->load->model("Ubicaciones_model");
+
+		$datos['entidades'] = $this->Ubicaciones_model->lista_entidades();
 
 		$datos['contenido_view'] = "encuestas/resultados_view";
 

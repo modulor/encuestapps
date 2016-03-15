@@ -4,6 +4,9 @@
 /* text responsive */
 @import url('text-align-responsive.css');
 
+/* responsive design */
+@import url('responsive.css');
+
 
 body{
 	font-family: 'Lato', sans-serif;
@@ -136,13 +139,10 @@ span.fecha-hora-creacion{
 /*** ***/
 
 
-/*** responsive ***/
+/*** margin bottom ***/
 
-@media(max-width: 767px){
-	.page-header{
-		font-size: 32px;
-	}
+.margin-bottom-20{
+	margin-bottom: 20px;
 }
-
 
 /*** ***/

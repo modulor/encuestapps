@@ -1,7 +1,9 @@
 <div class="form-group">
-	<label for="cat_municipios_k" class="control-label">* Municipios</label>
+	<?php if($mostrar_label): ?>
+	<label for="cat_municipios_k" class="control-label"><?php print $asterisco ?>Municipios</label>
+	<?php endif ?>
 	<select name="cat_municipios_k" id="cat_municipios_k" class="form-control">
-		<option value=""></option>
+		<?php print $primer_resultado ?>
 		<?php 
 			foreach($municipios as $municipio):
 		?>
