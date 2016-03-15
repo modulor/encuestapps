@@ -314,6 +314,47 @@ class Encuestas_model extends CI_Model{
 
 	}
 
+
+	// informacion de una respuesta para mostrar en modal
+
+	public function pregunta_resultados($datos)
+	{
+
+		return $query = $this->db->select("er.fecha_hora_creacion, er.encuestas_resultados_k, de.sexo as genero, de.rango_edad, de.seccion, cm.nom_mun as municipio")
+		->from("encuestas_resultados er")
+		->join("datos_encuestados de","de.datos_encuestados_k = er.datos_encuestados_k")
+		->join("cat_municipios cm","cm.cat_municipios_k = er.cat_municipios_k")
+		->where("er.encuestas_preguntas_opciones_k",$datos['encuestas_preguntas_opciones_k'])
+		->order_by("er.fecha_hora_creacion")
+		->limit(100)
+		->get()
+		->result();
+
+	}
+
+
+	// informacion de una pregunta
+
+	public function get_info_pregunta($encuestas_preguntas_k)
+	{
+
+		return $query = $this->db->where("encuestas_preguntas_k",$encuestas_preguntas_k)
+		->get("encuestas_preguntas")
+		->row();
+
+	}
+
+
+	// informacion de una opcion de respuesta de una pregunta (tabla: encuestas_preguntas_opciones)
+
+	public function get_info_respuesta($encuestas_preguntas_opciones_k)
+	{
+
+		return $query = $this->db->where("encuestas_preguntas_opciones_k",$encuestas_preguntas_opciones_k)
+		->get("encuestas_preguntas_opciones")
+		->row();
+
+	}
 }
 
 ?>

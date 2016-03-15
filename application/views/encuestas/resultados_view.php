@@ -6,6 +6,8 @@
 	</div>
 </div>
 
+
+<!-- botones accion -->
 <div class="row hidden-xs">
 	<div class="col-lg-12">
 		<div class="well">
@@ -44,7 +46,10 @@
 		</p>
 	</div>
 </div>
+<!-- botones accion fin -->
 
+
+<!-- buscar resultados -->
 <form action="<?php print base_url()."encuestas/resultados/".$encuesta->encuestas_k ?>" method="post" onsubmit="return valida_buscar_resultados_encuesta();">
 	<div class="row">
 		<div class="col-md-12">		
@@ -53,12 +58,12 @@
 					<div class="col-sm-8">
 						<div class="row">
 							<div class="col-sm-12 col-xs-12">								
-								<div class="input-daterange input-group margin-bottom-20" id="datepicker">
+								<div class="input-daterange input-group" id="datepicker">
 								    <input type="text" class="form-control" name="fecha_inicio" id="fecha_inicio" value="<?php print $fecha_inicio ?>" />
 								    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 								    <input type="text" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php print $fecha_fin ?>" />
 								</div>
-								<a href="#" name="mas_filtros">M&aacute;s opciones <i class="fa fa-angle-down"></i></a>
+								<!--<a href="#" name="mas_filtros">M&aacute;s opciones <i class="fa fa-angle-down"></i></a>-->
 								<script>
 									$(function(){
 
@@ -70,6 +75,8 @@
 										    multidate: false,
 										    language: 'es',
 										    format: "yyyy-mm-dd",
+										    autoclose: true,
+										    orientation: 'bottom'
 										});
 
 										// mas opciones
@@ -158,14 +165,17 @@
 		</div>
 	</div>
 </form>
+<!-- buscar resultados fin -->
 
+
+<!-- preguntas y graficas -->
 <?php
 	foreach($preguntas as $pregunta):
 ?>
-
 <div class="row">
-	<div class="<?php print $class_col_preguntas ?>">		
-		<!-- preguntas -->		
+
+	<!-- preguntas -->
+	<div class="<?php print $class_col_preguntas ?>">						
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				<h2 class="panel-title"><?php print $pregunta->pregunta ?></h2>				
@@ -181,12 +191,10 @@
 					foreach($opciones as $opcion):
 
 				?>
-				<li class="list-group-item">
-
+				<button class="list-group-item" data-toggle="modal" data-target="#preguntaModal" data-encuestas-preguntas-opciones-k="<?php print $opcion->encuestas_preguntas_opciones_k ?>" data-encuestas-preguntas-k="<?php print $pregunta->encuestas_preguntas_k ?>">
 					<span class="badge badge-primary"><?php $votos = $this->Encuestas_model->get_votos_pregunta($opcion->encuestas_preguntas_opciones_k, $fecha_inicio, $fecha_fin); print $votos ?></span>
-
 					<?php  print $opcion->opcion; ?>
-				</li>
+				</button>
 				<?php 
 
 						// datos para el js highcharts pie
@@ -201,12 +209,12 @@
 				?>
 				<!-- respuestas fin -->
 			</ul>
-		</div>
-		<!-- preguntas fin -->
+		</div>		
 	</div>
-	<div class="<?php print $class_col_pie ?>">
-		
-		<!-- grafica pie -->
+	<!-- preguntas fin -->
+
+	<!-- grafica pie -->
+	<div class="<?php print $class_col_pie ?>">				
 		<div id="grafica_pie_<?php print $pregunta->encuestas_preguntas_k ?>"></div>
 		<?php $data = json_encode($los_resultados_pie) ?>
 		<script type="text/javascript">
@@ -245,18 +253,14 @@
 			    });
 			});
 		</script>
-		<!-- grafica pie fin -->
-
 	</div>
+	<!-- grafica pie fin -->
 
+	<!-- grafica linea -->
 	<?php 
-
 		if($grafica_linea_mostrar):
-
 	?>
-	<div class="<?php print $class_col_linea ?>">
-
-		<!-- grafica linea -->
+	<div class="<?php print $class_col_linea ?>">		
 		<?php
 
 			$los_resultados_linea = array();
@@ -314,21 +318,18 @@
 			        series: <?php print $data_pie ?>
 			    });
 			});
-		</script>
-		<!-- grafica linea fin -->
-
+		</script>		
 	</div>
 	<?php 
-
 		endif;
-
 	?>
-</div>
+	<!-- grafica linea fin -->
 
-<hr>
+</div>
 <?php 
 	endforeach;
 ?>
+<!-- preguntas y graficas fin -->
 
 
 <!-- enviar encuesta modal -->
@@ -356,6 +357,26 @@
 	</div>
 </div>
 <!-- enviar encuesta modal fin -->
+
+
+<!-- ver respuestas de pregunta modal -->
+<div class="modal fade" id="preguntaModal" tabindex="1" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+				<h4 class="modal-title" id="modal_pregunta_title"></h4>
+				<p class="text-muted" id="modal_respuesta_title"></p>
+			</div>
+			<div class="modal-body" id="modal_pregunta_contenido">
+			</div>
+			<div class="modal-footer">				
+				<button type="button" class="btn btn-default hide" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ver respuestas de pregunta modal fin -->
 
 <script type="text/javascript">
 
@@ -465,5 +486,48 @@
 		}
 
 	}
+
+
+	// trigger para el modal con info de una pregunta
+
+	$("button.list-group-item").click(function(){
+
+		var encuestas_preguntas_opciones_k = $(this).data('encuestas-preguntas-opciones-k');
+
+		var encuestas_preguntas_k = $(this).data('encuestas-preguntas-k');		
+
+		$.ajax({
+	        url: base_url+"encuestas/pregunta_resultados/", 
+	        type: "POST", 
+	        dataType: 'html',
+	        data: {
+	            encuestas_preguntas_opciones_k: encuestas_preguntas_opciones_k,
+	            encuestas_preguntas_k: encuestas_preguntas_k,
+	            fecha_inicio: $('fecha_inicio').val(),
+	            fecha_fin: $('fecha_fin').val()
+	        },   
+	        beforeSend: function(){
+
+	        	$("#modal_pregunta_contenido").html("<div class='text-center'><i class='fa fa-spinner fa-spin fa-3x'></i></div>");
+	        	
+	        },                 
+	        success: function(respond){ 
+	        	
+				$("#modal_pregunta_contenido").html(respond);	        	
+
+	        },
+	        error: function (data){		            
+
+	        	swal({
+					title: "Oops...",
+					text: "Ocurrio un error inesperado...",
+					timer: 3500,
+					type: "error"
+				});			
+
+	        }
+	    });
+
+	});
 
 </script>

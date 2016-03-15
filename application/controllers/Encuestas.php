@@ -342,6 +342,30 @@ class Encuestas extends CI_Controller{
 	}
 
 
+	// informacion de los votos de una pregunta
+
+	public function pregunta_resultados()
+	{
+
+		if($this->input->post()):
+
+			// info de la pregunta
+
+			$datos['pregunta'] = $this->Encuestas_model->get_info_pregunta($_POST['encuestas_preguntas_k']);
+
+			// info de la opcion o respuesta
+
+			$datos['respuesta'] = $this->Encuestas_model->get_info_respuesta($_POST['encuestas_preguntas_opciones_k']);
+
+			$datos['resultados'] = $this->Encuestas_model->pregunta_resultados($this->input->post());
+
+			$this->load->view("encuestas/pregunta_info_view",$datos);
+
+		endif;
+
+	}
+
+
 	// test borrar
 
 	public function generar_datos()
