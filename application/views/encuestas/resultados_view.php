@@ -155,10 +155,10 @@
 						</div>						
 					</div>	
 					<div class="col-sm-2 col-xs-6 text-right">
-						<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-search"></i></button>
+						<button type="submit" class="btn btn-primary btn-block btns-resultados"><i class="fa fa-search"></i></button>
 					</div>
 					<div class="col-sm-2 col-xs-6 text-right">
-						<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#enviarEncuestaModal"><i class="fa fa-envelope"></i></button>
+						<button type="button" class="btn btn-danger btn-block btns-resultados" data-toggle="modal" data-target="#enviarEncuestaModal"><i class="fa fa-envelope"></i></button>
 					</div>				
 				</div>
 			</div>		
