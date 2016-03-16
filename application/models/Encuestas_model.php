@@ -141,10 +141,9 @@ class Encuestas_model extends CI_Model{
 			$data = array(
 				'encuestas_preguntas_opciones_k' => $datos['encuestas_preguntas_k_'.$pregunta->encuestas_preguntas_k],
 				'cat_municipios_k' => $datos['cat_municipios_k'],
-				'datos_encuestados_k' => $datos_encuestados_k
+				'datos_encuestados_k' => $datos_encuestados_k,
+				'encuestador_usuarios_k' => $datos['encuestador_usuarios_k']
 			);
-
-			// $data['encuestas_preguntas_opciones_k'] = $datos['encuestas_preguntas_k_'.$pregunta->encuestas_preguntas_k];
 
 			$insert = $this->db->insert("encuestas_resultados",$data);
 

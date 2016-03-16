@@ -172,7 +172,7 @@
 <?php
 	foreach($preguntas as $pregunta):
 ?>
-<div class="row">
+<div class="row margin-bottom-20">
 
 	<!-- preguntas -->
 	<div class="<?php print $class_col_preguntas ?>">						

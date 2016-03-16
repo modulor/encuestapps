@@ -181,8 +181,8 @@
 
 			<input type="hidden" id="num_preguntas" value="<?php print $p ?>">
 
-
-
+			<input type="hidden" name="encuestador_usuarios_k" value="<?php print $this->session->userdata("usuarios_k") ?>">
+			
 			<div class="form-group">
 				<button class="btn btn-info btn-block btn-lg">Guardar</button>
 				<a href="<?php print base_url()."encuestas/mis_encuestas/".$encuesta->campaigns_k ?>" class="btn btn-default btn-block btn-lg">Cancelar</a>
