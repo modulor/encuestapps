@@ -1,5 +1,5 @@
 <div class="table-responsive">
-	<table class="table table-bordered table-striped">
+	<table class="table table-bordered table-striped" style="width: 100%;">
 		<thead>
 			<tr>
 				<th>#</th>
@@ -23,7 +23,7 @@
 				<td><?php print $row->rango_edad." a&ntilde;os" ?></td>
 				<td><?php print $row->municipio ?></td>
 				<td><?php print $row->seccion ?></td>
-				<td></td>
+				<td><?php print $row->email_encuestador ?></td>
 			</tr>
 			<?php 					
 				endforeach;
@@ -35,7 +35,17 @@
 
 <script type="text/javascript">
 	$(function(){
+		
 		$("#modal_pregunta_title").html("<?php print $pregunta->pregunta ?>");
 		$("#modal_respuesta_title").html("<?php print $respuesta->opcion ?>");
+
+		// datatables
+
+		$('table').DataTable({
+        	"language": {
+            	"url": "<?php print base_url().'assets/datatables/spanish.json' ?>"
+        	}
+	    });
+
 	})
 </script>

@@ -503,8 +503,8 @@
 	        data: {
 	            encuestas_preguntas_opciones_k: encuestas_preguntas_opciones_k,
 	            encuestas_preguntas_k: encuestas_preguntas_k,
-	            fecha_inicio: $('fecha_inicio').val(),
-	            fecha_fin: $('fecha_fin').val()
+	            fecha_inicio: $('#fecha_inicio').val(),
+	            fecha_fin: $('#fecha_fin').val()
 	        },   
 	        beforeSend: function(){
 
@@ -527,6 +527,11 @@
 
 	        }
 	    });
+
+
+	    // agregar col-xs-2 para los divs con "mostrar registros" y "buscar" del encabezado del datatables
+
+	    DataTables_Table_2_wrapper
 
 	});
 

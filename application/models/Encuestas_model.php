@@ -319,13 +319,15 @@ class Encuestas_model extends CI_Model{
 	public function pregunta_resultados($datos)
 	{
 
-		return $query = $this->db->select("er.fecha_hora_creacion, er.encuestas_resultados_k, de.sexo as genero, de.rango_edad, de.seccion, cm.nom_mun as municipio")
+		return $query = $this->db->select("er.fecha_hora_creacion, er.encuestas_resultados_k, de.sexo as genero, de.rango_edad, de.seccion, cm.nom_mun as municipio, u.email as email_encuestador")
 		->from("encuestas_resultados er")
 		->join("datos_encuestados de","de.datos_encuestados_k = er.datos_encuestados_k")
 		->join("cat_municipios cm","cm.cat_municipios_k = er.cat_municipios_k")
+		->join("usuarios u","u.usuarios_k = er.encuestador_usuarios_k")
 		->where("er.encuestas_preguntas_opciones_k",$datos['encuestas_preguntas_opciones_k'])
+		->where("er.fecha_hora_creacion >=",$datos['fecha_inicio'])
+		->where("er.fecha_hora_creacion <=",$datos['fecha_fin'])
 		->order_by("er.fecha_hora_creacion")
-		->limit(100)
 		->get()
 		->result();
 
