@@ -65,11 +65,15 @@ class Encuestadores extends CI_Controller{
 	public function info($usuarios_k)
 	{
 
-		$this->load->library('typography');
+		if($this->Usuarios_model->validar($usuarios_k)):
 
-		$datos['encuestador'] = $this->Encuestadores_model->info($usuarios_k);
+			$this->load->library('typography');
 
-		$this->load->view("encuestadores/info_view",$datos);
+			$datos['encuestador'] = $this->Encuestadores_model->info($usuarios_k);
+
+			$this->load->view("encuestadores/info_view",$datos);
+
+		endif;
 
 	}
 
@@ -79,9 +83,13 @@ class Encuestadores extends CI_Controller{
 	public function cambiar_estatus($usuarios_k)
 	{
 
-		$cambiar = $this->Encuestadores_model->cambiar_estatus($usuarios_k);
+		if($this->Usuarios_model->validar($usuarios_k)):
 
-		$this->lista();
+			$cambiar = $this->Encuestadores_model->cambiar_estatus($usuarios_k);
+
+			$this->lista();
+
+		endif;
 
 	}
 
@@ -91,12 +99,32 @@ class Encuestadores extends CI_Controller{
 	public function borrar($usuarios_k)
 	{
 
+		if(!$this->Usuarios_model->validar($usuarios_k))
+			redirect(base_url(),"refresh");
+
 		if($this->input->post())
 			$datos['ok'] = $this->Encuestadores_model->borrar($usuarios_k);
 		else
 			$datos['encuestador'] = $this->Encuestadores_model->info($usuarios_k);
 
 		$datos['contenido_view'] = "encuestadores/borrar_view";
+
+		$this->load->view("base_view",$datos);
+
+	}
+
+
+	// ver las encuestas que ha realizado un encuestador
+
+	public function encuestas($usuarios_k = "")
+	{
+
+		if(!$this->Usuarios_model->validar($usuarios_k))
+			redirect(base_url(),"refresh");
+
+		$datos['encuestador'] = $this->Encuestadores_model->info($usuarios_k);
+
+		$datos['contenido_view'] = "encuestadores/encuestas_view";
 
 		$this->load->view("base_view",$datos);
 

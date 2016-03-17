@@ -130,7 +130,11 @@ class Encuestas_model extends CI_Model{
 
 		$guardar_encuestado = $this->db->insert("datos_encuestados",$data_encuestado);
 
+		// recuperamos "datos_encuestados_k"
+
 		$datos_encuestados_k = $this->db->insert_id();
+
+		// obtenemos las preguntas de la "encuestas_k"
 
 		$preguntas = $this->get_preguntas_encuesta($datos['encuestas_k']);
 

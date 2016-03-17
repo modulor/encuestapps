@@ -55,9 +55,10 @@
 								<span class="label <?php print $estatus_class?>"><?php print $estatus_texto ?></span>
 							</td>
 							<td>
-								<button name="encuestador_ver" class="btn btn-info btn-xs" title="ver informaci&oacute;n encuestador" data-toggle="modal" data-target="#encuestadorModal" data-usuariosk="<?php print $encuestador->usuarios_k ?>"><i class="fa fa-user"></i></button>
+								<button name="encuestador_ver" class="btn btn-default btn-xs" title="ver informaci&oacute;n encuestador" data-toggle="modal" data-target="#encuestadorModal" data-usuariosk="<?php print $encuestador->usuarios_k ?>"><i class="fa fa-user"></i></button>
 								<a href="<?php print base_url()."encuestadores/cambiar_estatus/".$encuestador->usuarios_k ?>" class="btn btn-<?php print $link_btn_class ?> btn-xs" title="<?php print $link_title ?> encuestador"><i class="fa fa-<?php print $link_icon ?>"></i></a>
 								<a href="<?php print base_url()."encuestadores/borrar/".$encuestador->usuarios_k ?>" class="btn btn-danger btn-xs" title="borrar encuestador"><i class="fa fa-times"></i></a>
+								<a href="<?php print base_url()."encuestadores/encuestas/".$encuestador->usuarios_k ?>" class="btn btn-info btn-xs" title="ver encuestas"><i class="fa fa-check-square-o"></i></a>
 							</td>
 						</tr>
 						<?php 

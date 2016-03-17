@@ -1,6 +1,27 @@
 <?php 
 
 class Usuarios_model extends CI_Model{
+
+
+    // valida que exista un usuarios_k
+
+    public function validar($usuarios_k = "")
+    {
+
+        if(!is_numeric($usuarios_k))
+            return fasle;
+
+        $query = $this->db->select("usuarios_k")
+        ->where("usuarios_k",$usuarios_k)
+        ->get("usuarios")
+        ->num_rows();
+
+        if($query > 0)
+            return true;
+
+        return false;
+
+    }
 	
 	public function get_datos_clientes_k($usuarios_k)
 	{
