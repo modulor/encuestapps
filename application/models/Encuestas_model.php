@@ -360,6 +360,71 @@ class Encuestas_model extends CI_Model{
 		->row();
 
 	}
+
+
+	// TEST BORRAR RANDOM NAMES
+
+    public function random_names_a($sexo = 1)
+    {
+
+        // $sexo 1 hombres, 2 mujeres
+
+        $names[1] = array(
+            'Christian',
+            'Roberto',
+            'Eduardo',
+            'Jose',
+            'Sarah',
+            'Carlos',
+            'Maria',
+            'Leonardo',
+            'Francisco',
+            'Alberto',
+            'Pedro'
+        );
+
+        $names[2] = array(
+
+            'Maria Guadalupe',
+            'Maria',
+            'Juana',
+            'Maria del Carmen',
+            'Margarita',
+            'Veronica',
+            'Elizabeth',
+            'Alejandra',
+            'Leticia',
+            'Maria Elena',
+            'Gabriela',
+            'Maria de los Angeles',
+
+        );
+         
+        //PHP array containing surnames.
+        $surnames = array(
+            'Peres',
+            'Sanchez',
+            'Jimenez',
+            'Noriega',
+            'Lopez',
+            'Perez',
+            'Guerrero',
+            'Romo',
+            'Coronado',
+            'Benitez'
+        );
+         
+        //Generate a random forename.
+        $random_name = $names[mt_rand(0, sizeof($names[$sexo]) - 1)];
+         
+        //Generate a random surname.
+        $random_surname = $surnames[mt_rand(0, sizeof($surnames) - 1)];
+         
+        //Combine them together and print out the result.
+        return $random_name . ' ' . $random_surname;
+
+    }
+
 }
 
 ?>

@@ -119,10 +119,25 @@ class Encuestadores extends CI_Controller{
 	public function encuestas($usuarios_k = "")
 	{
 
-		if(!$this->Usuarios_model->validar($usuarios_k))
+		if(!$this->Usuarios_model->validar($usuarios_k) || !$this->Usuarios_model->nos_pertenece_encuestador($this->session->userdata("usuarios_k"), $usuarios_k))
 			redirect(base_url(),"refresh");
 
 		$datos['encuestador'] = $this->Encuestadores_model->info($usuarios_k);
+
+		$datos['fecha_inicio'] = date("Y-m-01");
+		$datos['fecha_fin'] = date("Y-m-22");
+
+		if($this->input->post()):
+
+			$datos['fecha_inicio'] = $_POST['fecha_inicio'];
+
+			$datos['fecha_fin'] = $_POST['fecha_fin'];
+		
+		endif;
+
+		$datos['encuestas'] = $this->Encuestadores_model->encuestas_realizadas($usuarios_k, $datos['fecha_inicio'], $datos['fecha_fin']);
+
+		$datos['total_encuestas'] = sizeof($datos['encuestas']);
 
 		$datos['contenido_view'] = "encuestadores/encuestas_view";
 

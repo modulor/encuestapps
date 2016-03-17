@@ -366,58 +366,7 @@ class Encuestas extends CI_Controller{
 	}
 
 
-	// test borrar
-
-	public function generar_datos()
-	{
-
-		$begin = new DateTime( '2016-03-02' );
-		$end = new DateTime( '2016-03-04' );
-
-		$interval = DateInterval::createFromDateString('1 day');
-		$period = new DatePeriod($begin, $interval, $end);
-
-		$x = 1;
-
-		foreach ( $period as $dt ):
-			
-			$fecha = $dt->format( "Y-m-d H:i:s\n" );
-
-			print "<p><strong>$x - ".$fecha."</strong></p>";
-
-			$limite = rand(1, 9);
-
-			for($i = 0; $i < $limite; $i++){
-				$query = $this->db->query("insert into encuestas_resultados (encuestas_preguntas_opciones_k,fecha_hora_creacion) values (61,'$fecha')");
-			}
-
-			/*
-
-			$limite = rand(2, 4);
-
-			for($i = 0; $i < $limite; $i++){
-				$query = $this->db->query("insert into encuestas_resultados (encuestas_preguntas_opciones_k,fecha_hora_creacion) values (62,'$fecha')");
-			}
-				
-			$limite = rand(1, 4);
-
-			for($i = 0; $i < $limite; $i++){
-				$query = $this->db->query("insert into encuestas_resultados (encuestas_preguntas_opciones_k,fecha_hora_creacion) values (63,'$fecha')");
-			}
-
-			$limite = rand(4, 5);
-
-			for($i = 0; $i < $limite; $i++){
-				$query = $this->db->query("insert into encuestas_resultados (encuestas_preguntas_opciones_k,fecha_hora_creacion) values (64,'$fecha')");
-			}
-
-			*/
-
-			$x++;
-
-		endforeach;
-
-	}
+	
 
 
 	// test borrar
@@ -562,6 +511,173 @@ class Encuestas extends CI_Controller{
 
         */
 	}
+
+
+	// TEST BORRAR RANDOM NAMES
+
+    public function random_encuestado()
+    {
+
+    	// random celular
+
+    	$celular = '';
+
+	    for($i = 0; $i < 10; $i++) {
+	        $celular .= mt_rand(0, 9);
+	    }
+
+
+	    // seccion 
+
+	    $seccion = mt_rand(1,32);
+
+
+        // rango de edades
+
+        $edades = array(
+        	'18-25',
+        	'26-35',
+        	'36-45',
+        	'46'
+        );
+
+
+        // sexo
+
+        $sexos = array(
+        	'HOMBRE',
+        	'MUJER'
+        );
+
+
+        // random edad
+
+        $rango_edad = $edades[mt_rand(0,sizeof($edades) - 1)];
+
+
+        // random sexo
+
+        $sexo = $sexos[mt_rand(0,sizeof($sexos) - 1)];
+         
+        
+        //print "edad: ".$edad." -- sexo: ".$sexo;
+
+
+        $data = array(
+        	'celular' => $celular,
+        	'seccion' => $seccion,
+        	'rango_edad' => $rango_edad,
+        	'sexo' => $sexo
+        );
+
+
+        $query = $this->db->insert("datos_encuestados",$data);
+
+        $datos_encuestados_k = $this->db->insert_id();
+
+        return $datos_encuestados_k;
+
+        
+
+    }
+
+
+    // test borrar
+
+	public function generar_datos()
+	{
+
+		$begin = new DateTime( '2016-01-01' );
+		$end = new DateTime( '2016-03-18' );
+
+		$interval = DateInterval::createFromDateString('1 day');
+		$period = new DatePeriod($begin, $interval, $end);
+
+		$x = 1;		
+
+		foreach ( $period as $dt ):
+			
+			$fecha = $dt->format( "Y-m-d H:i:s" );
+
+			print "<p><strong>$x - ".$fecha."</strong></p>";
+
+
+			// loop para un numero de personas encuestadas en una fecha
+
+			for($personas = 1; $personas <= 15; $personas ++){
+
+				// guardar datos de "encuestados" falsos : 1 hombre, 2 mujer
+
+				$datos_encuestados_k = $this->random_encuestado(rand ( 0, 1 ));
+
+
+				// pregunta 1
+
+				// ids de respuestas posibles
+
+				$respuestas_uno = array(
+					61,
+					62,
+					63,
+					64	
+				);
+
+				$encuestas_preguntas_opciones_k = $respuestas_uno[mt_rand(0,sizeof($respuestas_uno) - 1)];
+				
+				$query = $this->db->query("
+					insert into encuestas_resultados 
+					(encuestas_preguntas_opciones_k, datos_encuestados_k, cat_municipios_k, encuestador_usuarios_k, fecha_hora_creacion) values 
+					($encuestas_preguntas_opciones_k,$datos_encuestados_k, 1, 1, '$fecha')
+				");
+
+
+				// pregunta 2
+
+				// ids de respuestas posibles
+
+				$respuestas_dos = array(
+					65,
+					66,
+					67,
+					68	
+				);
+
+				$encuestas_preguntas_opciones_k = $respuestas_dos[mt_rand(0,sizeof($respuestas_dos) - 1)];
+				
+				$query = $this->db->query("
+					insert into encuestas_resultados 
+					(encuestas_preguntas_opciones_k, datos_encuestados_k, cat_municipios_k, encuestador_usuarios_k, fecha_hora_creacion) values 
+					($encuestas_preguntas_opciones_k,$datos_encuestados_k, 1, 1, '$fecha')
+				");
+
+
+				// pregunta 3
+
+				// ids de respuestas posibles
+
+				$respuestas_tres = array(
+					69,
+					70,
+					71,
+					72	
+				);
+
+				$encuestas_preguntas_opciones_k = $respuestas_tres[mt_rand(0,sizeof($respuestas_tres) - 1)];
+				
+				$query = $this->db->query("
+					insert into encuestas_resultados 
+					(encuestas_preguntas_opciones_k, datos_encuestados_k, cat_municipios_k, encuestador_usuarios_k, fecha_hora_creacion) values 
+					($encuestas_preguntas_opciones_k,$datos_encuestados_k, 1, 1, '$fecha')
+				");
+
+			}
+
+			$x++;
+
+		endforeach;
+
+	}
+
 
 }
 

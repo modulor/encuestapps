@@ -101,6 +101,26 @@ class Encuestadores_model extends CI_Model{
 		return true;
 
 	}
+
+
+	// lista de encuestas realizadas por un encuestador
+
+	public function encuestas_realizadas($usuarios_k, $fecha_inicio, $fecha_fin)
+	{
+
+		return $query = $this->db->select("er.fecha_hora_creacion, cm.nom_mun as municipio, ce.nom_ent as entidad")
+		->from("encuestas_resultados er")
+		->join("cat_municipios cm","cm.cat_municipios_k = er.cat_municipios_k")
+		->join("cat_entidades ce","ce.cve_ent = cm.cve_ent")
+		->where("er.encuestador_usuarios_k", $usuarios_k)
+		->where("er.fecha_hora_creacion >=",$fecha_inicio." 00:00:00")
+		->where("er.fecha_hora_creacion <=",$fecha_fin." 23:59:59")
+		->group_by("er.datos_encuestados_k")
+		->order_by("er.fecha_hora_creacion")
+		->get()
+		->result();
+
+	}
 	
 }
 	

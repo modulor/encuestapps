@@ -266,6 +266,37 @@ class Usuarios_model extends CI_Model{
 
         return false;
 
+    }    
+
+
+    // verifica si un usuarios_k nos pertenece como encuestador
+
+    public function nos_pertenece_encuestador($cliente_usuarios_k, $encuestador_usuarios_k)
+    {
+
+        $query = $this->db->select("u.usuarios_k")
+        ->from("usuarios u")
+        ->join("datos_clientes dc","dc.usuarios_k = u.usuarios_k")
+        ->join("datos_encuestadores de","de.datos_clientes_k = dc.datos_clientes_k")
+        ->where("u.usuarios_k",$cliente_usuarios_k)
+        ->where("de.usuarios_k",$encuestador_usuarios_k)
+        ->get()
+        ->num_rows();
+
+        if($query > 0)
+            return true;
+
+        return false;
+
+        /*
+        select u.usuarios_k
+        from usuarios u
+        join datos_clientes dc on dc.usuarios_k = u.usuarios_k
+        join datos_encuestadores de on de.datos_clientes_k = dc.datos_clientes_k
+        where u.usuarios_k = 2 
+        and de.usuarios_k = 1
+        */
+        
     }
 
 }
