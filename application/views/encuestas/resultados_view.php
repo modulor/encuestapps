@@ -285,7 +285,45 @@
 		<script type="text/javascript">
 			$(function () {
 			    $('#grafica_linea_<?php print $pregunta->encuestas_preguntas_k ?>').highcharts({
+			    	chart: {
+			            type: 'area'
+			        },
 			        title: {
+			            text: ''
+			        },
+			        subtitle: {
+			            text: ''
+			        },
+			        xAxis: {
+			            categories: <?php print json_encode($array_fechas_texto) ?>,
+			            tickmarkPlacement: 'on',
+			            title: {
+			                enabled: false
+			            }
+			        },
+			        yAxis: {
+			            title: {
+			                text: 'Porcentaje'
+			            }
+			        },
+			        tooltip: {
+			            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} votos)<br/>',
+			            shared: true
+			        },
+			        plotOptions: {
+			            area: {
+			                stacking: 'percent',
+			                lineColor: '#ffffff',
+			                lineWidth: 1,
+			                marker: {
+			                    lineWidth: 1,
+			                    lineColor: '#ffffff'
+			                }
+			            }
+			        },
+			        series: <?php print $data_pie ?>
+			        /*
+					title: {
 			            text: '',
 			            x: -20 //center
 			        },
@@ -316,6 +354,7 @@
 			            borderWidth: 0
 			        },
 			        series: <?php print $data_pie ?>
+			        */
 			    });
 			});
 		</script>		
