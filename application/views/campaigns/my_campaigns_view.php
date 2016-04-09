@@ -40,9 +40,18 @@
 			<div class="col-sm-6">
 			
 				<div class="thumbnail text-center">
-					<p class="text-right">
-						<a title="borrar campa&ntilde;a" href="<?php print base_url()."campaigns/delete_campaign/".$campaign->campaigns_k ?>" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></a>
-					</p>
+					<div class="text-right">						
+						<div class="dropdown text-right">
+							<button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								<i class="fa fa-gear"></i>
+							</button>
+							<ul class="dropdown-menu pull-right" aria-labelledby="dropdownMenu1">
+								<li>
+									<a title="borrar campa&ntilde;a" href="<?php print base_url()."campaigns/delete_campaign/".$campaign->campaigns_k ?>"><i class="fa fa-times"></i> Eliminar</a>
+								</li>
+							</ul>
+						</div>
+					</div>
 					<i class="fa fa-flag fa-4x"></i>
 					<div class="caption">						
 						<h3><?php print $campaign->campaign ?></h3>						
